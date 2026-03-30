@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>同志社サークルポータル</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4f9;--ink:#2d1a4a;--accent:#6b21a8;--accent2:#9333ea;--muted:#7c6a96;--card:#fff;--border:#ddd0ee;--tag:#ede9f6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+header{background:var(--ink);color:#f0eaf8;padding:0 1.5rem;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:56px;border-bottom:3px solid var(--accent2);}
+.logo{font-family:'DM Serif Display',serif;font-size:1.05rem;}
+.logo span{color:var(--accent2);}
+nav{display:flex;gap:1rem;font-size:.8rem;font-weight:700;align-items:center;}
+nav a{color:#c4aee0;text-decoration:none;}
+.hero{background:var(--ink);color:#f0eaf8;padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(255,255,255,.025) 24px,rgba(255,255,255,.025) 25px);}
+.hero-eye{font-size:.68rem;font-weight:700;letter-spacing:.2em;color:var(--accent2);text-transform:uppercase;margin-bottom:.5rem;position:relative;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,5vw,2.8rem);line-height:1.15;margin-bottom:.75rem;position:relative;}
+.hero p{color:#c4aee0;font-size:.88rem;max-width:500px;margin:0 auto;line-height:1.7;position:relative;}
+.match-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;padding:.65rem 1.4rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:30px;font-family:inherit;font-size:.88rem;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(107,33,168,.4);position:relative;}
+.controls{background:#fff;border-bottom:1px solid var(--border);padding:.75rem 1.25rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;position:sticky;top:56px;z-index:90;}
+.sw{flex:1;min-width:180px;position:relative;}
+.sw svg{position:absolute;left:.65rem;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);}
+.sw input{width:100%;padding:.45rem .65rem .45rem 2rem;border:1.5px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem;background:var(--bg);outline:none;}
+.sw input:focus{border-color:var(--accent);}
+.fbtn{padding:.38rem .85rem;border:1.5px solid var(--border);border-radius:20px;font-family:inherit;font-size:.74rem;font-weight:700;background:transparent;cursor:pointer;white-space:nowrap;}
+.fbtn:hover,.fbtn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.stats{padding:.5rem 1.5rem;font-size:.75rem;color:var(--muted);font-weight:700;}
+.stats span{color:var(--accent);}
+.stats a{color:var(--accent);text-decoration:none;}
+main{max-width:1100px;margin:0 auto;padding:0 1.25rem 3rem;}
+.cat-sec{margin-bottom:2rem;}
+.cat-hd{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--ink);color:#f0eaf8;border-radius:10px 10px 0 0;}
+.cat-hd .icon{font-size:1.3rem;}
+.cat-hd .title{font-size:1rem;font-weight:900;}
+.cat-hd .cnt{margin-left:auto;font-size:.72rem;color:var(--accent2);font-weight:700;background:rgba(147,51,234,.2);padding:.15rem .55rem;border-radius:10px;}
+.blk-hd{background:var(--tag);padding:.4rem 1rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;border-top:1px solid var(--border);}
+.clist{background:var(--card);border:1.5px solid var(--border);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;}
+.ci{display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-bottom:1px solid var(--border);}
+.ci:last-child{border-bottom:none;}
+.ci:hover{background:var(--tag);}
+.ci-em{font-size:1.2rem;flex-shrink:0;width:1.8rem;text-align:center;}
+.ci-nm{font-size:.88rem;font-weight:700;flex:1;cursor:pointer;}
+.ci-rat{display:flex;align-items:center;gap:.25rem;flex-shrink:0;cursor:pointer;}
+.ci-rat:hover{opacity:.75;}
+.ci-stars{font-size:.82rem;color:#f59e0b;}
+.ci-rv{font-size:.7rem;font-weight:700;color:var(--muted);}
+.ci-rbtn{font-size:.68rem;font-weight:700;padding:.2rem .5rem;background:var(--tag);color:var(--accent);border:1.5px solid var(--border);border-radius:5px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.ci-rbtn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.ci-lnk{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;font-weight:700;color:var(--accent);padding:.22rem .55rem;border:1.5px solid var(--border);border-radius:5px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.ci-lnk:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.no-res{text-align:center;padding:3rem 1rem;color:var(--muted);}
+footer{background:var(--ink);color:#9b7ec8;text-align:center;padding:1.5rem;font-size:.73rem;}
+footer strong{color:#c4aee0;}
+footer a{color:var(--accent2);text-decoration:none;}
+
+/* OVERLAY BASE */
+.ov{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.ov.open{display:flex;}
+.ov-bg{background:rgba(20,8,40,.78);}
+.ov-bg2{background:rgba(26,10,50,.65);}
+@keyframes pop{from{transform:scale(.93);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+/* DETAIL MODAL */
+.dbox{background:#fff;border-radius:18px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(107,33,168,.4);animation:pop .25s ease;}
+.dhd{background:linear-gradient(135deg,var(--ink),#4c1d95);padding:1.25rem 1.5rem;border-radius:18px 18px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:1;}
+.dhd-em{font-size:2rem;margin-bottom:.3rem;}
+.dhd-nm{color:#f0eaf8;font-size:1.1rem;font-weight:900;line-height:1.3;}
+.dhd-bl{color:#c4aee0;font-size:.72rem;font-weight:700;margin-top:.25rem;}
+.xbtn{background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:1rem;cursor:pointer;flex-shrink:0;}
+.dbody{padding:1.25rem;display:flex;flex-direction:column;gap:1.1rem;}
+.sec-t{font-size:.68rem;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
+.sec-c{font-size:.88rem;line-height:1.7;color:var(--ink);}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.mi{background:var(--tag);border-radius:8px;padding:.6rem .75rem;}
+.mi-l{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.mi-v{font-size:.85rem;font-weight:700;color:var(--ink);margin-top:.15rem;}
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;}
+.badge.rec{background:#dcfce7;color:#166534;}
+.badge.cls{background:#fee2e2;color:#991b1b;}
+.sns-row{display:flex;gap:.5rem;flex-wrap:wrap;}
+.sns-a{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .85rem;background:var(--tag);color:var(--ink);border-radius:8px;text-decoration:none;font-size:.78rem;font-weight:700;}
+.sns-a:hover{background:var(--ink);color:#fff;}
+.dbtns{display:flex;gap:.6rem;}
+.dbtn-r{flex:1;padding:.65rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.88rem;font-weight:900;cursor:pointer;}
+.dbtn-d{flex:1;padding:.65rem;background:var(--tag);color:var(--ink);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.88rem;font-weight:900;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.35rem;}
+.dbtn-d:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+/* RATING */
+.ro{text-align:center;padding:.85rem;background:var(--tag);border-radius:10px;margin-bottom:.85rem;}
+.ro-score{font-size:2.2rem;font-weight:900;color:var(--accent);}
+.ri-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+.ri-bar{height:6px;background:#e9d5ff;border-radius:3px;overflow:hidden;}
+.ri-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;}
+
+/* SMALL BOX */
+.sbox{background:#fff;border-radius:14px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.shd{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;}
+.sbody{padding:1.25rem;display:flex;flex-direction:column;gap:.85rem;}
+.fld label{font-size:.75rem;font-weight:700;color:var(--muted);display:block;margin-bottom:.3rem;}
+.fld input,.fld select,.fld textarea{width:100%;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:.88rem;outline:none;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent);}
+.fld2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.fld3{display:grid;grid-template-columns:1fr 80px;gap:.6rem;}
+.btns{display:flex;gap:.6rem;margin-top:.25rem;}
+.btn-c{flex:1;padding:.6rem;background:var(--tag);color:var(--ink);border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;}
+.btn-s{flex:2;padding:.6rem;background:linear-gradient(135deg,#1e3a5f,#2d4a7a);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;}
+
+/* RATING MODAL */
+.rbox{background:#fff;border-radius:18px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 24px 80px rgba(107,33,168,.35);}
+.rhd{background:linear-gradient(135deg,var(--ink),#4c1d95);padding:1.1rem 1.4rem;border-radius:18px 18px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.rhd h3{color:#f0eaf8;font-size:.95rem;font-weight:900;}
+.rbody{padding:1.3rem;}
+.ritem{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;}
+.ritem-l{font-size:.82rem;font-weight:700;}
+.rstars{display:flex;gap:.2rem;}
+.rstar{font-size:1.6rem;cursor:pointer;line-height:1;color:#d8c8f0;}
+.rstar.on{color:#f59e0b;}
+.rsub{width:100%;margin-top:.5rem;padding:.65rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:900;cursor:pointer;}
+
+/* MATCHING */
+.mbox{background:#fff;border-radius:18px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(107,33,168,.35);animation:pop .25s ease;}
+.mhd{background:linear-gradient(135deg,var(--ink),#4c1d95);padding:1.25rem 1.5rem;border-radius:18px 18px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.mhd h2{color:#f0eaf8;font-size:1.05rem;font-weight:900;}
+.mbody{padding:1.5rem;}
+.mprog{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
+.mprog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s ease;}
+.mql{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
+.mqt{font-size:1rem;font-weight:900;line-height:1.45;margin-bottom:1.25rem;}
+.mopts{display:flex;flex-direction:column;gap:.6rem;}
+.mopt{padding:.75rem 1rem;border:2px solid var(--border);border-radius:10px;font-family:inherit;font-size:.88rem;font-weight:700;text-align:left;background:#fff;cursor:pointer;display:flex;align-items:center;gap:.6rem;}
+.mopt:hover{border-color:var(--accent);background:var(--tag);}
+.mopt-i{font-size:1.2rem;flex-shrink:0;}
+.mres{text-align:center;}
+.mcard{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;border-radius:10px;border:2px solid var(--border);text-align:left;margin-bottom:.75rem;}
+.mcard.r1{border-color:#f59e0b;background:#fffbeb;}
+.mcard.r2{border-color:var(--accent);background:var(--tag);}
+.mcard.r3{border-color:var(--border);background:#fafafa;}
+.mcard-bar{margin-top:.5rem;height:5px;background:#e9d5ff;border-radius:3px;overflow:hidden;}
+.mcard-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;}
+.mlink{display:block;margin-bottom:.75rem;padding:.7rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;font-family:inherit;font-weight:900;font-size:.88rem;text-align:center;cursor:pointer;width:100%;}
+.mretry{width:100%;padding:.75rem;background:var(--ink);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;}
+
+/* CALENDAR */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;}
+.cal-nav button{background:var(--tag);border:none;border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.9rem;}
+.cal-nav span{font-weight:900;font-size:.92rem;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-cell{text-align:center;padding:.3rem .1rem;border-radius:8px;min-height:2.2rem;}
+.cal-cell.has-evt{background:#f3e8ff;cursor:pointer;}
+.cal-cell.today{background:var(--accent);}
+.cal-cell.today .cal-day{color:#fff;}
+.cal-day{font-size:.82rem;}
+.cal-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;margin:2px auto 0;}
+.cal-dot-w{background:#fff;}
+.evt-item{padding:.75rem;background:linear-gradient(135deg,#fdf4ff,#f3e8ff);border-radius:10px;border:1.5px solid #e9d5ff;margin-bottom:.6rem;}
+
+/* KEEP */
+.heart{background:none;border:none;font-size:1.1rem;cursor:pointer;flex-shrink:0;padding:0 .1rem;line-height:1;opacity:.4;transition:opacity .15s,transform .15s;}
+.heart.on{opacity:1;}
+.heart:active{transform:scale(1.3);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">同志社<span>サークルポータル</span></div>
+  <nav>
+    <span class="nav-links" style="display:flex;gap:1.5rem;">
+      <a href="#">ホーム</a>
+      <a href="https://www.d-live.info/club" target="_blank">D-Live公式</a>
+    </span>
+    <button id="authBtn" onclick="openAuthModal()" style="background:var(--accent2);color:#fff;border:none;padding:.3rem .85rem;border-radius:20px;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;">代表者ログイン</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="hero-eye">Doshisha University Circle Portal 2025</p>
+  <h1>あなたに合う<br>サークルを見つけよう</h1>
+  <p>同志社大学の公認団体を全カテゴリ掲載。体育会・スポーツブロック・文化系をまとめて検索できます。</p>
+  <button class="match-btn" onclick="openMatching()">✨ サークル相性診断をする</button>
+</section>
+
+<div class="controls">
+  <div class="sw">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="サークル名で検索…" oninput="renderMain()">
+  </div>
+  <button class="fbtn active" onclick="setFilter('all',this)">すべて</button>
+  <button class="fbtn" onclick="setFilter('体育会',this)">体育会</button>
+  <button class="fbtn" onclick="setFilter('スポーツ',this)">スポーツブロック</button>
+  <button class="fbtn" onclick="setFilter('文化系',this)">文化系</button>
+  <button class="fbtn" onclick="setFilter('非公認',this)" style="border-color:#7c3aed;color:#7c3aed;">📋 自由サークル（非公認）</button>
+  <button class="fbtn" onclick="setFilter('インカレ',this)" style="border-color:#059669;color:#059669;">🏫 インカレ</button>
+  <button class="fbtn" onclick="setFilter('keep',this)" style="border-color:#db2777;color:#db2777;">❤️ キープ</button>
+</div>
+
+<div class="stats">全 <span id="countDisplay">0</span> 団体 掲載中　／　出典: <a href="https://www.d-live.info/club" target="_blank">D-Live（同志社大学公式）</a></div>
+
+<!-- マイ新歓カレンダー -->
+<section id="myCalSection" style="background:#fff;border-bottom:1px solid var(--border);padding:1.1rem 1.25rem;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
+    <div style="display:flex;align-items:center;gap:.5rem;">
+      <span style="font-size:1.1rem;">🌸</span>
+      <span style="font-weight:900;font-size:.95rem;">マイ新歓カレンダー</span>
+      <span style="font-size:.7rem;color:var(--muted);font-weight:700;">キープ中のサークルのイベント</span>
+    </div>
+    <button onclick="toggleMyCal()" id="myCalToggle" style="font-size:.72rem;font-weight:700;padding:.25rem .65rem;background:var(--tag);color:var(--muted);border:1.5px solid var(--border);border-radius:6px;cursor:pointer;">折りたたむ</button>
+  </div>
+  <div id="myCalBody">
+    <div id="myCalGrid"></div>
+    <div id="myCalEmpty" style="display:none;text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;">キープしたサークルに新歓イベントがありません</div>
+  </div>
+</section>
+
+<main id="mainContent"></main>
+
+<footer>
+  <strong>同志社サークルポータル</strong> &copy; 2025<br>
+  <span style="font-size:.65rem;margin-top:.3rem;display:block;color:#6b5a8a">掲載情報は <a href="https://www.d-live.info/club" target="_blank">D-Live（同志社大学課外活動公式サイト）</a> をもとにしています。</span>
+</footer>
+
+<!-- サークル選択モーダル -->
+<div class="ov ov-bg2" id="csModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="sbox" style="max-width:420px;" id="csBox"></div>
+</div>
+
+<!-- 認証モーダル -->
+<div class="ov ov-bg2" id="authModal" onclick="if(event.target===this)closeAuthModal()">
+  <div class="sbox" style="max-width:400px;">
+    <div class="shd" style="background:linear-gradient(135deg,#1e3a5f,#2d4a7a);">
+      <span id="authTitle" style="color:#fff;font-weight:900;">代表者ログイン</span>
+      <button class="xbtn" onclick="closeAuthModal()">✕</button>
+    </div>
+    <div class="sbody">
+      <input type="hidden" id="authMode" value="login">
+      <div class="fld"><label>メールアドレス</label><input id="authEmail" type="email" placeholder="example@doshisha.ac.jp"></div>
+      <div class="fld"><label>パスワード</label><input id="authPass" type="password" placeholder="パスワード"></div>
+      <div id="authMsg" style="font-size:.78rem;color:#e11d48;min-height:1.2rem;"></div>
+      <div id="authSwitch" style="font-size:.75rem;color:var(--muted);"></div>
+      <div class="btns">
+        <button class="btn-c" onclick="closeAuthModal()">キャンセル</button>
+        <button class="btn-s" id="authSubmit" onclick="submitAuth()">ログイン</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 詳細モーダル -->
+<div class="ov ov-bg" id="dModal" onclick="if(event.target===this)closeDModal()">
+  <div class="dbox" id="dBox"></div>
+</div>
+
+<!-- 評価詳細モーダル -->
+<div class="ov ov-bg" id="rdModal" onclick="if(event.target===this)document.getElementById('rdModal').classList.remove('open')">
+  <div class="rbox" id="rdBox"></div>
+</div>
+
+<!-- 評価入力モーダル -->
+<div class="ov ov-bg" id="rModal" onclick="if(event.target===this)document.getElementById('rModal').classList.remove('open')">
+  <div class="rbox">
+    <div class="rhd"><h3>⭐ サークルを評価する</h3><button class="xbtn" onclick="document.getElementById('rModal').classList.remove('open')">✕</button></div>
+    <div class="rbody">
+      <div style="font-size:1rem;font-weight:900;margin-bottom:1rem;" id="rClubName"></div>
+      <div id="rItems"></div>
+      <button class="rsub" onclick="submitRating()">評価を送信する</button>
+    </div>
+  </div>
+</div>
+
+<!-- 非公認団体モーダル -->
+<div class="ov ov-bg2" id="uModal" onclick="if(event.target===this)closeUModal()">
+  <div class="sbox">
+    <div class="shd" style="background:linear-gradient(135deg,#1e3a5f,#2d4a7a);">
+      <span id="uModalTitle" style="color:#fff;font-weight:900;">自由サークルを追加</span>
+      <button class="xbtn" onclick="closeUModal()">✕</button>
+    </div>
+    <div class="sbody">
+      <div class="fld"><label>団体名 <span style="color:#e11d48">*</span></label><input id="uName" type="text" placeholder="例：同志社フットサルサークルXXX"></div>
+      <div class="fld3">
+        <div class="fld"><label>カテゴリ <span style="color:#e11d48">*</span></label><input id="uBlock" type="text" placeholder="スポーツ、音楽…"></div>
+        <div class="fld"><label>絵文字</label><input id="uEmoji" type="text" placeholder="🎓" maxlength="4" style="text-align:center;font-size:1.2rem;"></div>
+      </div>
+      <div class="fld"><label>URL</label><input id="uUrl" type="url" placeholder="https://..."></div>
+      <div class="fld"><label>一言説明</label><input id="uDesc" type="text" placeholder="例：週2回活動。初心者歓迎！"></div>
+      <div class="btns">
+        <button class="btn-c" onclick="closeUModal()">キャンセル</button>
+        <button class="btn-s" onclick="saveUClub()">保存する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- インカレサークルモーダル -->
+<div class="ov ov-bg2" id="incModal" onclick="if(event.target===this)closeIncModal()">
+  <div class="sbox">
+    <div class="shd" style="background:linear-gradient(135deg,#065f46,#059669);">
+      <span id="incModalTitle" style="color:#fff;font-weight:900;">インカレサークルを追加</span>
+      <button class="xbtn" onclick="closeIncModal()">✕</button>
+    </div>
+    <div class="sbody">
+      <div class="fld"><label>サークル名 <span style="color:#e11d48">*</span></label><input id="incName" type="text" placeholder="例：TalkMates、CHAI"></div>
+      <div class="fld"><label>ジャンル <span style="color:#e11d48">*</span></label><input id="incBlock" type="text" placeholder="例：国際交流、スポーツ、ダンス"></div>
+      <div class="fld3">
+        <div class="fld"><label>主な拠点大学</label><input id="incBase" type="text" placeholder="例：同志社・立命・京大"></div>
+        <div class="fld"><label>絵文字</label><input id="incEmoji" type="text" placeholder="🌍" maxlength="4" style="text-align:center;font-size:1.2rem;"></div>
+      </div>
+      <div class="fld"><label>同志社生が参加できるか</label>
+        <select id="incJoin">
+          <option value="yes">✅ 同志社生参加可</option>
+          <option value="doshisha">🏫 同志社主導</option>
+          <option value="unknown">❓ 不明</option>
+        </select>
+      </div>
+      <div class="fld"><label>URL（SNS・サイトなど）</label><input id="incUrl" type="url" placeholder="https://..."></div>
+      <div class="fld"><label>一言説明</label><input id="incDesc" type="text" placeholder="例：同女・立命・京大との交流あり。初心者歓迎！"></div>
+      <div class="btns">
+        <button class="btn-c" onclick="closeIncModal()">キャンセル</button>
+        <button class="btn-s" style="background:linear-gradient(135deg,#065f46,#059669);" onclick="saveIncClub()">保存する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- マッチングモーダル -->
+<div class="ov ov-bg" id="matchModal" onclick="if(event.target===this)closeMatching()">
+  <div class="mbox" id="matchBox"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+'use strict';
+
+// ===== SUPABASE =====
+var SUPABASE_URL = 'https://grzuslztsmqcjxpoqksi.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_EroSDL2exm0CCXe8WbNfPQ_K24tFHLg';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var currentUser = null;
+
+// データバージョン管理（更新時はこの数字を上げる）
+var U_DATA_VERSION = 3;
+(function() {
+  var v = parseInt(localStorage.getItem('u_data_ver')||'0');
+  if (v < U_DATA_VERSION) {
+    // 古いデータを削除してデフォルトを再適用
+    localStorage.removeItem('unofficial');
+    localStorage.setItem('u_data_ver', String(U_DATA_VERSION));
+  }
+})();
+
+(async function() {
+  try {
+    var res = await sb.auth.getUser();
+    if (res.data && res.data.user) { currentUser = res.data.user; }
+  } catch(e) {}
+  renderAuthBtn();
+  renderMain();
+  loadMyCal();
+})();
+
+function renderAuthBtn() {
+  var btn = document.getElementById('authBtn');
+  if (!btn) return;
+  if (currentUser) {
+    var my = getMyCircle();
+    btn.innerHTML = my
+      ? '<span style="font-size:.72rem;">'+my+'</span> <span style="opacity:.7;font-size:.68rem;">▼</span>'
+      : '担当サークルを選択';
+    btn.onclick = openCircleSelectModal;
+    // ログアウトボタンを別に表示
+    var lo = document.getElementById('logoutBtn');
+    if (!lo) {
+      lo = document.createElement('button');
+      lo.id = 'logoutBtn';
+      lo.style.cssText = 'background:rgba(255,255,255,.15);color:#fff;border:none;padding:.3rem .65rem;border-radius:20px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;margin-left:.4rem;';
+      lo.textContent = 'ログアウト';
+      lo.onclick = function() { sb.auth.signOut().then(function(){ currentUser=null; setMyCircle(''); renderAuthBtn(); renderMain(); document.getElementById('logoutBtn').remove(); }); };
+      btn.parentNode.insertBefore(lo, btn.nextSibling);
+    }
+  } else {
+    btn.textContent = '代表者ログイン';
+    btn.onclick = openAuthModal;
+    var lo2 = document.getElementById('logoutBtn');
+    if (lo2) lo2.remove();
+  }
+}
+
+function openAuthModal() {
+  document.getElementById('authMode').value = 'login';
+  document.getElementById('authMsg').textContent = '';
+  renderAuthForm();
+  document.getElementById('authModal').classList.add('open');
+}
+function closeAuthModal() { document.getElementById('authModal').classList.remove('open'); }
+function renderAuthForm() {
+  var m = document.getElementById('authMode').value;
+  document.getElementById('authTitle').textContent = m === 'login' ? '代表者ログイン' : '新規アカウント登録';
+  document.getElementById('authSubmit').textContent = m === 'login' ? 'ログイン' : '登録する';
+  document.getElementById('authSwitch').innerHTML = m === 'login'
+    ? 'アカウントをお持ちでない方は<button onclick="switchAuth()" style="background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;text-decoration:underline;">新規登録</button>'
+    : 'すでにアカウントをお持ちの方は<button onclick="switchAuth()" style="background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;text-decoration:underline;">ログイン</button>';
+}
+function switchAuth() {
+  var m = document.getElementById('authMode');
+  m.value = m.value === 'login' ? 'signup' : 'login';
+  document.getElementById('authMsg').textContent = '';
+  renderAuthForm();
+}
+// 担当サークルをlocalStorageで管理
+function getMyCircle() { return localStorage.getItem('myCircle')||''; }
+function setMyCircle(name) { localStorage.setItem('myCircle', name); }
+
+// 全サークル名リストを取得
+function getAllClubNames() {
+  var names = [];
+  DATA.forEach(function(cat) {
+    cat.blocks.forEach(function(bl) {
+      bl.clubs.forEach(function(c) { names.push(c[0]); });
+    });
+  });
+  loadInc().forEach(function(c) { names.push(c.name); });
+  loadU().forEach(function(c) { names.push(c.name); });
+  return names.sort();
+}
+
+function openCircleSelectModal() {
+  var names = getAllClubNames();
+  var current = getMyCircle();
+  var opts = names.map(function(n) {
+    return '<option value="'+n+'"'+(n===current?' selected':'')+'>'+n+'</option>';
+  }).join('');
+  document.getElementById('csBox').innerHTML =
+    '<div class="shd" style="background:linear-gradient(135deg,var(--accent),var(--accent2));">'
+    +'<span style="color:#fff;font-weight:900;">担当サークルを選択</span>'
+    +'<button class="xbtn" onclick="document.getElementById(\'csModal\').classList.remove(\'open\')">✕</button>'
+    +'</div>'
+    +'<div class="sbody">'
+    +'<div style="font-size:.82rem;color:var(--muted);line-height:1.6;">あなたが代表者のサークルを選んでください。選択したサークルのみ情報の編集・新歓イベントの追加ができます。</div>'
+    +'<div class="fld"><label>担当サークル</label>'
+    +'<select id="csSelect" style="width:100%;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:.88rem;outline:none;">'
+    +'<option value="">選択してください</option>'+opts
+    +'</select></div>'
+    +'<button onclick="saveMyCircle()" style="padding:.65rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:900;cursor:pointer;width:100%;">決定する</button>'
+    +'</div>';
+  document.getElementById('csModal').classList.add('open');
+}
+
+function saveMyCircle() {
+  var v = document.getElementById('csSelect').value;
+  if (!v) { alert('サークルを選択してください'); return; }
+  setMyCircle(v);
+  document.getElementById('csModal').classList.remove('open');
+  renderAuthBtn();
+  renderMain();
+  alert('「'+v+'」の代表者として設定しました！');
+}
+
+// 編集権限チェック
+function canEdit(clubName) {
+  if (!currentUser) return false;
+  var my = getMyCircle();
+  return my === clubName;
+}
+
+async function submitAuth() {
+  var email = document.getElementById('authEmail').value.trim();
+  var pass  = document.getElementById('authPass').value.trim();
+  var mode  = document.getElementById('authMode').value;
+  var msg   = document.getElementById('authMsg');
+  if (!email || !pass) { msg.textContent = 'メールとパスワードを入力してください'; return; }
+  msg.textContent = '処理中...';
+  var res = mode === 'login'
+    ? await sb.auth.signInWithPassword({ email: email, password: pass })
+    : await sb.auth.signUp({ email: email, password: pass });
+  if (res.error) { msg.textContent = 'エラー: ' + res.error.message; return; }
+  if (mode === 'signup') { msg.textContent = '確認メールを送信しました。メールのリンクをクリックしてください。'; return; }
+  currentUser = res.data.user;
+  closeAuthModal();
+  renderAuthBtn();
+  renderMain();
+  // ログイン後にサークル選択モーダルを開く
+  setTimeout(function() { openCircleSelectModal(); }, 300);
+}
+
+// ===== サークルデータ =====
+var DATA = [
+  { cat:'体育会クラブ', key:'体育会', icon:'🏆', blocks:[
+    { b:'氷上・雪上', clubs:[['アイスホッケー部','🏒','https://www.d-live.info/club/sports/1025'],['フィギュアスケート部','⛸','https://www.d-live.info/club/sports/1026'],['スピードスケート部','⛸','https://www.d-live.info/club/sports/1027'],['スキー部','⛷','https://www.d-live.info/club/sports/1028']] },
+    { b:'水上・水泳', clubs:[['水泳部','🏊','https://www.d-live.info/club/sports/1029'],['ボート部','🚣','https://www.d-live.info/club/sports/1030'],['ボードセイリング部','🏄','https://www.d-live.info/club/sports/1031'],['ヨット部','⛵','https://www.d-live.info/club/sports/1032'],['カヌー部','🛶','https://www.d-live.info/club/sports/1033']] },
+    { b:'アウトドア', clubs:[['山岳部','🏔','https://www.d-live.info/club/sports/1034'],['ワンダーフォーゲル部','🥾','https://www.d-live.info/club/sports/1035']] },
+    { b:'射的・弓道', clubs:[['アーチェリー部','🏹','https://www.d-live.info/club/sports/1036'],['弓道部','🎯','https://www.d-live.info/club/sports/1037'],['射撃部','🎯','https://www.d-live.info/club/sports/1038']] },
+    { b:'ゴルフ・モータースポーツ', clubs:[['ゴルフ部','⛳','https://www.d-live.info/club/sports/1039'],['ボウリング部','🎳','https://www.d-live.info/club/sports/1040'],['自動車部','🚗','https://www.d-live.info/club/sports/1041'],['自転車競技部','🚴','https://www.d-live.info/club/sports/1042'],['トライアスロン部','🏊','https://www.d-live.info/club/sports/1043'],['航空部','✈️','https://www.d-live.info/club/sports/1044']] },
+    { b:'格闘技・武道', clubs:[['ボクシング部','🥊','https://www.d-live.info/club/sports/1045'],['相撲部','🤼','https://www.d-live.info/club/sports/1046'],['柔道部','🥋','https://www.d-live.info/club/sports/1047'],['レスリング部','🤼','https://www.d-live.info/club/sports/1048'],['空手道部','🥋','https://www.d-live.info/club/sports/1049'],['剣道部','⚔️','https://www.d-live.info/club/sports/1050'],['フェンシング部','🤺','https://www.d-live.info/club/sports/1051'],['日本拳法部','👊','https://www.d-live.info/club/sports/1052'],['少林寺拳法部','🥋','https://www.d-live.info/club/sports/1053'],['合気道部','🥋','https://www.d-live.info/club/sports/1054'],['居合道部','⚔️','https://www.d-live.info/club/sports/1055'],['馬術部','🐴','https://www.d-live.info/club/sports/1056']] },
+    { b:'球技・フィールド系', clubs:[['アメリカンフットボール部','🏈','https://www.d-live.info/club/sports/1057'],['ラグビー部','🏉','https://www.d-live.info/club/sports/1058'],['サッカー部','⚽','https://www.d-live.info/club/sports/1059'],['バスケットボール部','🏀','https://www.d-live.info/club/sports/1060'],['バレーボール部','🏐','https://www.d-live.info/club/sports/1061'],['ハンドボール部','🤾','https://www.d-live.info/club/sports/1062'],['ラクロス部','🥍','https://www.d-live.info/club/sports/1063'],['硬式野球部','⚾','https://www.d-live.info/club/sports/1064'],['準硬式野球部','⚾','https://www.d-live.info/club/sports/1065'],['軟式野球部','⚾','https://www.d-live.info/club/sports/1066'],['ソフトボール部','🥎','https://www.d-live.info/club/sports/1067'],['テニス部','🎾','https://www.d-live.info/club/sports/1068'],['ソフトテニス部','🎾','https://www.d-live.info/club/sports/1069'],['卓球部','🏓','https://www.d-live.info/club/sports/1070'],['陸上ホッケー部','🏑','https://www.d-live.info/club/sports/1071'],['バドミントン部','🏸','https://www.d-live.info/club/sports/1072'],['陸上競技部','🏃','https://www.d-live.info/club/sports/1073'],['体操競技部','🤸','https://www.d-live.info/club/sports/1074'],['フットサル部','⚽','https://www.d-live.info/club/sports/1099']] },
+    { b:'その他', clubs:[['スポーツアトム編集局','📰','https://www.d-live.info/club/sports/1075'],['体育会本部','🏛','https://www.d-live.info/club/sports/1281']] }
+  ]},
+  { cat:'スポーツブロッククラブ', key:'スポーツ', icon:'⚽', blocks:[
+    { b:'スキー', clubs:[['ルナティックス・スキークラブ','⛷','https://www.d-live.info/club/sportsblock/1076']] },
+    { b:'マリンスポーツ', clubs:[['ヨットクルージングクラブ','⛵','https://www.d-live.info/club/sportsblock/1078']] },
+    { b:'アウトドア', clubs:[['釣研究会','🎣','https://www.d-live.info/club/sportsblock/1079'],['山岳同好会','🏔','https://www.d-live.info/club/sportsblock/1080'],['ハイキング同好会','🥾','https://www.d-live.info/club/sportsblock/1081'],['熱気球チーム','🎈','https://www.d-live.info/club/sportsblock/1084']] },
+    { b:'ゴルフ・自転車', clubs:[['ゴルフ同好会','⛳','https://www.d-live.info/club/sportsblock/1082'],['サイクリングクラブ','🚴','https://www.d-live.info/club/sportsblock/1083']] },
+    { b:'武道・格闘技', clubs:[['剣練会','⚔️','https://www.d-live.info/club/sportsblock/1085'],['テコンドー部','🥋','https://www.d-live.info/club/sportsblock/1086'],['拳友会','👊','https://www.d-live.info/club/sportsblock/1088'],['プロレス同盟','🤼','https://www.d-live.info/club/sportsblock/1087']] },
+    { b:'球技・フィールド系', clubs:[['INTENSITY（バスケットボール）','🏀','https://www.d-live.info/club/sportsblock/1089'],['ラグビー同好会H&T','🏉','https://www.d-live.info/club/sportsblock/1091'],['サッカー同好会三ツ葉キッカーズ','⚽','https://www.d-live.info/club/sportsblock/1092'],['FCブルーローバーズ','⚽','https://www.d-live.info/club/sportsblock/1093'],['軟式テニス同好会','🎾','https://www.d-live.info/club/sportsblock/1095'],['卓球同好会','🏓','https://www.d-live.info/club/sportsblock/1096'],['アルティメットサークル同志社Magic','🥏','https://www.d-live.info/club/sportsblock/1097'],['Du&Doバドミントンハウス','🏸','https://www.d-live.info/club/sportsblock/1098']] }
+  ]},
+  { cat:'文化系公認クラブ', key:'文化系', icon:'🎭', blocks:[
+    { b:'合唱ブロック', clubs:[['同志社学生混声合唱団 C.C.D.','🎶','https://www.d-live.info/club/culture/1100'],['グリークラブ','🎶','https://www.d-live.info/club/culture/1101'],['同志社混声合唱団こまくさ','🎶','https://www.d-live.info/club/culture/1102'],['コールフリューゲル','🎶','https://www.d-live.info/club/culture/1103'],['リーダークランツ','🎶','https://www.d-live.info/club/culture/1104'],['One Voices','🎵','https://www.d-live.info/club/culture/1105'],['同志社学生聖歌隊','🎵','https://www.d-live.info/club/culture/1106'],['同志社ウィメンズクワイア〜コールメイプル','🎵','https://www.d-live.info/club/culture/1225']] },
+    { b:'軽音ブロック', clubs:[['フォーク・アライブ・クラブ（F・A・C）','🎸','https://www.d-live.info/club/culture/1107'],['Folk Song Society（F.S.S.）','🎸','https://www.d-live.info/club/culture/1108'],['軽音楽部','🎸','https://www.d-live.info/club/culture/1109'],['軽音楽研究会（I.P.C.）','🎸','https://www.d-live.info/club/culture/1110'],['ライラックレインボーズ','🎸','https://www.d-live.info/club/culture/1112'],['サザン・マウンテン・ミュージック研究会','🎸','https://www.d-live.info/club/culture/1113'],['とんがりぼうし','🎸','https://www.d-live.info/club/culture/1114']] },
+    { b:'器楽ブロック', clubs:[['ギタークラブ','🎸','https://www.d-live.info/club/culture/1115'],['交響楽団','🎻','https://www.d-live.info/club/culture/1116'],['マンドリンクラブ','🪕','https://www.d-live.info/club/culture/1117'],['ピアノ研究会','🎹','https://www.d-live.info/club/culture/1118'],['ハンドベル・クワイア','🔔','https://www.d-live.info/club/culture/1119']] },
+    { b:'演劇ブロック', clubs:[['第三劇場','🎭','https://www.d-live.info/club/culture/1120'],['演劇集団Q','🎭','https://www.d-live.info/club/culture/1121'],['同志社小劇場','🎭','https://www.d-live.info/club/culture/1122'],['喜劇研究会','😂','https://www.d-live.info/club/culture/1123']] },
+    { b:'伝統芸能ブロック', clubs:[['雅楽会','🎵','https://www.d-live.info/club/culture/1124'],['邦楽部','🎵','https://www.d-live.info/club/culture/1125'],['能楽部金剛会','🎭','https://www.d-live.info/club/culture/1126'],['能楽部観世会','🎭','https://www.d-live.info/club/culture/1127'],['能楽部宝生会','🎭','https://www.d-live.info/club/culture/1128'],['能楽部狂言会','🎭','https://www.d-live.info/club/culture/1129']] },
+    { b:'伝統文化ブロック', clubs:[['茶道部','🍵','https://www.d-live.info/club/culture/1130'],['志清会','🌸','https://www.d-live.info/club/culture/1131'],['書道部','✒️','https://www.d-live.info/club/culture/1132'],['同志社競技かるた同好会','🃏','https://www.d-live.info/club/culture/1133']] },
+    { b:'メディアブロック', clubs:[['学生放送局','📻','https://www.d-live.info/club/culture/1134'],['学生新聞局','📰','https://www.d-live.info/club/culture/1135'],['学生テレビ局','📺','https://www.d-live.info/club/culture/1136'],['広告研究会 add\'s','📣','https://www.d-live.info/club/culture/1137']] },
+    { b:'写真ブロック', clubs:[['フォトクラブ','📷','https://www.d-live.info/club/culture/1138'],['カメラクラブ','📷','https://www.d-live.info/club/culture/1139'],['写真同好会','📷','https://www.d-live.info/club/culture/1140'],['卒業アルバム委員会','🎓','https://www.d-live.info/club/culture/1141']] },
+    { b:'映像ブロック', clubs:[['映画研究会','🎬','https://www.d-live.info/club/culture/1142'],['F.B.I.（映像制作）','🎥','https://www.d-live.info/club/culture/1143']] },
+    { b:'社会科学研究ブロック', clubs:[['同法会','⚖️','https://www.d-live.info/club/culture/1144'],['法学研究会','⚖️','https://www.d-live.info/club/culture/1145'],['会計学研究会','📊','https://www.d-live.info/club/culture/1146'],['政治学研究会','🏛','https://www.d-live.info/club/culture/1147']] },
+    { b:'国際研究ブロック', clubs:[['KOREA文化研究会','🇰🇷','https://www.d-live.info/club/culture/1148'],['E.S.S.（英語研究部）','🌍','https://www.d-live.info/club/culture/1150'],['グッドサマリタンクラブ','🤝','https://www.d-live.info/club/culture/1151'],['国際経済商学学生協会（アイセック）','🌐','https://www.d-live.info/club/culture/1152'],['国際交流サークル DESA','🌐','https://www.d-live.info/club/culture/1153'],['国際居住研究会','🏠','https://www.d-live.info/club/culture/1154'],['模擬国連（MUN）','🇺🇳','https://www.d-live.info/club/culture/1155']] },
+    { b:'應援團', clubs:[['應援團本部','📣','https://www.d-live.info/club/culture/1315'],['指導部','📣','https://www.d-live.info/club/culture/1156'],['吹奏楽部','🎺','https://www.d-live.info/club/culture/1157'],['チアリーダー部','🎀','https://www.d-live.info/club/culture/1158']] },
+    { b:'文化系１ブロック', clubs:[['同志社ミステリ研究会','🔍','https://www.d-live.info/club/culture/1159'],['模型研究会','🛩','https://www.d-live.info/club/culture/1160'],['将棋研究会','♟️','https://www.d-live.info/club/culture/1161'],['アニメーションヴォイス研究会','🎙','https://www.d-live.info/club/culture/1162'],['SF研究会','🚀','https://www.d-live.info/club/culture/1163']] },
+    { b:'文化系２ブロック', clubs:[['鉄道同好会','🚃','https://www.d-live.info/club/culture/1164'],['ワーキングコーラス','🎵','https://www.d-live.info/club/culture/1165'],['ユース・ホステル・クラブ','🏕','https://www.d-live.info/club/culture/1166'],['同志社ヒーローショーサークル','🦸','https://www.d-live.info/club/culture/1167']] },
+    { b:'芸術ブロック', clubs:[['ART-SOZO','🎨','https://www.d-live.info/club/culture/1168'],['クラマ画会','🖼','https://www.d-live.info/club/culture/1169'],['neuf','🎨','https://www.d-live.info/club/culture/1170'],['陶芸サークル「土夢」','🏺','https://www.d-live.info/club/culture/1171'],['漫画研究会','📚','https://www.d-live.info/club/culture/1172']] },
+    { b:'自然科学研究ブロック', clubs:[['電気情報研究会','💡','https://www.d-live.info/club/culture/1173'],['星の会','⭐','https://www.d-live.info/club/culture/1174'],['機械研究会','⚙️','https://www.d-live.info/club/culture/1175'],['ロボット研究会','🤖','https://www.d-live.info/club/culture/1176'],['天文同好会','🔭','https://www.d-live.info/club/culture/1177'],['同志社大学DERCロケットサークル','🚀','https://www.d-live.info/club/culture/1253']] },
+    { b:'人文科学研究ブロック', clubs:[['文学研究会','📖','https://www.d-live.info/club/culture/1178'],['地学研究会','🌍','https://www.d-live.info/club/culture/1179'],['考古学研究会','🏺','https://www.d-live.info/club/culture/1180'],['京都研究会','⛩','https://www.d-live.info/club/culture/1181'],['歴史美術研究会','🖼','https://www.d-live.info/club/culture/1182'],['史跡同好会','🗿','https://www.d-live.info/club/culture/1183']] },
+    { b:'表現ブロック', clubs:[['よさこいサークルよさ朗','🎆','https://www.d-live.info/club/culture/1184'],['Meahula Nohealani（フラダンス）','🌺','https://www.d-live.info/club/culture/1185'],['タップダンスサークル ShimSham','💃','https://www.d-live.info/club/culture/1186'],['マジック&ジャグリングサークル Hocus-Pocus','🎩','https://www.d-live.info/club/culture/1187']] }
+  ]}
+];
+
+// ===== 初期サークル情報 =====
+var DEFAULTS = {
+  'ラグビー部':{desc:'1911年創部。関西優勝を目指し日々精進。OBに松井千士（横浜キヤノンイーグルス）など多数のプロ選手を輩出。',days:'週5日（京田辺）',place:'京田辺 屋外施設',members:'75名',recruiting:'true',twitter:'https://twitter.com/doshisha_rugby',instagram:'https://www.instagram.com/doshisha_rugby/',website:'http://doshisha-rugby.com/'},
+  'アメリカンフットボール部':{desc:'1940年創部。「WILD ROVER」として関西1部リーグ所属。「日本一」を目標に約120名が学生主体で活動。',days:'火・水・金 18:00〜20:30',place:'京田辺 屋外施設',members:'97名',recruiting:'true',instagram:'https://www.instagram.com/wildrover_d',website:'https://www.wildrover-net.com'},
+  'ヨット部':{desc:'1933年創部。琵琶湖で金・土・日に活動。インカレ総合優勝26回の強豪。初心者7割。',days:'金・土・日',place:'琵琶湖',members:'29名',recruiting:'true',instagram:'https://instagram.com/d.u.y.c',website:'http://www.duyc.net/'},
+  '茶道部':{desc:'1936年創部。裏千家茶道の教えをもとに稽古。自由稽古制で好きな時間に参加OK。初心者8割。2026年に創部90周年。',days:'火〜土 9:00〜20:00（自由稽古制）',place:'今出川・京田辺 各校地BOX・寒梅軒',members:'45名',recruiting:'true',website:'https://dochado7.wixsite.com/dochado7'},
+  '交響楽団':{desc:'1925年創部。約150名が活動。年3回演奏会を中心に週3〜4回練習。チェコ海外公演実績あり。経験者8割。',days:'週3〜4回',place:'今出川 音楽練習場',members:'153名',recruiting:'true',website:'http://orchestra.musicinfo.co.jp/~dokyo/web/mail.html'},
+  'グリークラブ':{desc:'1904年創部。日本の男声合唱界を牽引。東西四大学合唱演奏会・定期演奏会・メサイア演奏会が活動の柱。団員の90%が初心者。',days:'週複数回',place:'今出川・京田辺 合唱練習場',members:'不明',recruiting:'true'},
+  'E.S.S.（英語研究部）':{desc:'1920年創部。ディスカッション・ディベート・スピーチ・カンバセーションの4セクション。経験者1割未満で初心者大歓迎。部員133名。',days:'週2回',place:'今出川 新町学生会館会議室',members:'133名',recruiting:'true',website:'http://duessduess.wixsite.com/doshisha-ess'},
+  'ロボット研究会':{desc:'2002年創部。毎週土曜13:00〜京田辺で活動。初心者大歓迎、半数以上が初心者スタート。ロボコン出場実績あり。',days:'毎週土曜 13:00〜18:00',place:'京田辺 別館会議室',members:'47名',recruiting:'true',twitter:'https://twitter.com/DoshishaRobo',instagram:'https://instagram.com/doshisharobot',website:'https://drc.hatenablog.com/'},
+  '模擬国連（MUN）':{desc:'1993年創部。国連会議をシミュレート。年7回の模擬国連会議を主催。週1回の勉強会も実施。初心者・2回生以上歓迎。',days:'週1回＋会議開催時',place:'今出川 新町学生会館会議室',members:'不明',recruiting:'true'},
+  'フォトクラブ':{desc:'1990年創部。スマートフォンでの撮影メイン。月2回関西各地で活動。第1・第3日曜開催。部員54名。',days:'毎月第1・第3日曜 13:00〜17:00',place:'関西各地（今出川発）',members:'54名',recruiting:'true',twitter:'https://twitter.com/doshisha_photo',instagram:'https://www.instagram.com/doshishaphotoclub'},
+  '星の会':{desc:'1977年創部。夜空が好きなら誰でも大歓迎。週1回（主に金曜）定期活動。流星群の時期には山へ観測遠征も。部員80名。',days:'毎週金曜（今出川・京田辺）',place:'今出川 新町学生会館会議室 / 京田辺 別館会議室',members:'80名',recruiting:'true',twitter:'https://twitter.com/hoshinokai_D'}
+};
+
+// ===== ストレージ =====
+function loadInfo() {
+  try {
+    var s = JSON.parse(localStorage.getItem('clubInfo')||'{}');
+    var m = {};
+    Object.keys(DEFAULTS).forEach(function(k){ m[k] = Object.assign({}, DEFAULTS[k]); });
+    Object.keys(s).forEach(function(k){ m[k] = Object.assign({}, m[k]||{}, s[k]); });
+    return m;
+  } catch(e) { return DEFAULTS; }
+}
+function saveInfo(d) { localStorage.setItem('clubInfo', JSON.stringify(d)); }
+function loadU() {
+  try {
+    var stored = JSON.parse(localStorage.getItem('unofficial')||'[]');
+    var defaults = getUDefaults();
+    // localStorageが空の場合のみデフォルトを保存
+    if (stored.length === 0) {
+      localStorage.setItem('unofficial', JSON.stringify(defaults));
+      return defaults;
+    }
+    // デフォルトのIDで存在しないものだけ追加（新しいデフォルトの追記に対応）
+    var storedIds = stored.map(function(c){ return c.id; });
+    var toAdd = defaults.filter(function(c){ return storedIds.indexOf(c.id) === -1; });
+    if (toAdd.length > 0) {
+      var merged = stored.concat(toAdd);
+      localStorage.setItem('unofficial', JSON.stringify(merged));
+      return merged;
+    }
+    return stored;
+  } catch(e) { return []; }
+}
+
+function getUDefaults() {
+  return [
+        // 文化・趣味系
+        {id:1,name:'同志社お菓子作りサークル',block:'料理・食',emoji:'🍪',url:'',desc:''},
+        {id:2,name:'料理サークル',block:'料理・食',emoji:'🍳',url:'',desc:''},
+        {id:3,name:'同志社ディズニーサークル',block:'イベント',emoji:'🏰',url:'',desc:''},
+        {id:4,name:'架空世界研究会',block:'文化・研究',emoji:'🌐',url:'',desc:''},
+        {id:5,name:'同志社ボードゲームサークル',block:'ゲーム',emoji:'🎲',url:'',desc:''},
+        {id:6,name:'同志社ルービックキューブサークル',block:'ゲーム',emoji:'🟨',url:'',desc:''},
+        {id:7,name:'同志社カラオケサークル エンジョイダム',block:'エンタメ',emoji:'🎤',url:'https://www.instagram.com/doshisha100enjoydam/',desc:''},
+        {id:8,name:'ダイビングサークル',block:'アウトドア・スポーツ',emoji:'🤿',url:'',desc:''},
+        {id:9,name:'起業部',block:'ビジネス',emoji:'💼',url:'',desc:''},
+        {id:10,name:'留学サークル',block:'国際交流',emoji:'✈️',url:'',desc:''},
+        {id:11,name:'歩き狂いサークル',block:'アウトドア・スポーツ',emoji:'🚶',url:'',desc:''},
+        {id:12,name:'ベンチャートレイン',block:'ビジネス',emoji:'🚂',url:'',desc:''},
+        {id:13,name:'国際居住研究会',block:'国際交流',emoji:'🏠',url:'',desc:''},
+        {id:14,name:'ハビタット',block:'ボランティア',emoji:'🏗️',url:'',desc:''},
+        // テニス系
+        {id:20,name:'同志社テニスサークル CREAM',block:'テニス',emoji:'🎾',url:'https://www.instagram.com/cream___2024/',desc:''},
+        {id:21,name:'同志社テニスサークル etranger',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:22,name:'同志社テニスサークル COSMOS',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:23,name:'同志社テニスサークル GREEN',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:24,name:'同志社硬式テニス同好会',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:25,name:'同志社テニスサークル FLYSPEAK',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:26,name:'同志社テニスサークル REGINA',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:27,name:'同志社テニスサークル ダブルフォルト',block:'テニス',emoji:'🎾',url:'https://www.instagram.com/doublefault__2023.doshisha/',desc:''},
+        {id:28,name:'同志社テニスサークル インペリアル',block:'テニス',emoji:'🎾',url:'https://www.instagram.com/doshisha.imperial/',desc:''},
+        {id:29,name:'同志社テニスサークル CHECKMATE',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:30,name:'同志社ソフトテニスサークル bunnies',block:'テニス',emoji:'🎾',url:'',desc:''},
+        {id:31,name:'同志社軟式テニス同好会',block:'テニス',emoji:'🎾',url:'',desc:''},
+        // フットサル・サッカー系
+        {id:40,name:'同志社フットサルサークル Noah',block:'フットサル・サッカー',emoji:'⚽',url:'',desc:''},
+        {id:41,name:'同志社サッカーサークル JUEGO',block:'フットサル・サッカー',emoji:'⚽',url:'https://www.instagram.com/juego.2022/',desc:''},
+        {id:42,name:'同志社男子サッカーサークル エスペランサ',block:'フットサル・サッカー',emoji:'⚽',url:'',desc:''},
+        {id:43,name:'同志社 genius',block:'フットサル・サッカー',emoji:'⚽',url:'https://www.instagram.com/geniusfcofficial/',desc:''},
+        {id:44,name:'同志社フットサル ゴラッソ',block:'フットサル・サッカー',emoji:'⚽',url:'',desc:''},
+        // バスケ系
+        {id:50,name:'同志社バスケサークル intensity',block:'バスケットボール',emoji:'🏀',url:'https://www.instagram.com/intensity_2025/',desc:''},
+        {id:51,name:'同志社バスケサークル leopard',block:'バスケットボール',emoji:'🏀',url:'https://www.instagram.com/leopard___2024/',desc:''},
+        {id:52,name:'ハンズアップ',block:'バスケットボール',emoji:'🏀',url:'',desc:''},
+        // 野球系
+        {id:60,name:'同志社軟式野球サークル パイシーズ',block:'野球',emoji:'⚾',url:'',desc:''},
+        {id:61,name:'同志社野球サークル cutters',block:'野球',emoji:'⚾',url:'https://www.instagram.com/doshisha_cutters_girls/',desc:''},
+        {id:62,name:'同志社野球サークル バンクス',block:'野球',emoji:'⚾',url:'',desc:''},
+        {id:63,name:'京大・同志社軟式野球サークル SNOOPY',block:'野球',emoji:'⚾',url:'',desc:''},
+        {id:64,name:'同志社キャップ野球サークル',block:'野球',emoji:'⚾',url:'',desc:''},
+        {id:65,name:'同志社軟式野球サークル うるまライオンズ',block:'野球',emoji:'⚾',url:'',desc:''},
+        {id:66,name:'同志社野球サークル Oceans',block:'野球',emoji:'⚾',url:'',desc:''},
+        // イベント系
+        {id:70,name:'同志社イベントサークル George',block:'イベント',emoji:'🎉',url:'',desc:''},
+        {id:71,name:'同志社イベントサークル hearts',block:'イベント',emoji:'🎉',url:'',desc:''},
+        {id:72,name:'同志社イベントサークル Rush',block:'イベント',emoji:'🎉',url:'',desc:''},
+        {id:73,name:'同志社イベントサークル ことこと',block:'イベント',emoji:'🎉',url:'',desc:''},
+        {id:74,name:'同志社スポーツサークル knit',block:'総合スポーツ',emoji:'🏃',url:'',desc:''},
+        {id:75,name:'トライブ',block:'総合スポーツ',emoji:'🏆',url:'',desc:''},
+        // 文化・観光系
+        {id:80,name:'京都研究会',block:'文化・研究',emoji:'⛩️',url:'',desc:''},
+        {id:81,name:'古都研究会',block:'文化・研究',emoji:'🏯',url:'',desc:''},
+        {id:82,name:'京都観光サークル 聚楽',block:'文化・研究',emoji:'🗺️',url:'',desc:''},
+        {id:83,name:'さわがに研究会',block:'文化・研究',emoji:'🦀',url:'',desc:''},
+        // バレー系
+        {id:90,name:'同志社バレーサークル sandlot',block:'バレーボール',emoji:'🏐',url:'',desc:''},
+        {id:91,name:'同志社バレーサークル プリッツ',block:'バレーボール',emoji:'🏐',url:'https://www.instagram.com/pritts2024/',desc:''},
+        {id:92,name:'同志社バレーサークル エル',block:'バレーボール',emoji:'🏐',url:'',desc:''},
+        {id:93,name:'同志社バレーサークル cav',block:'バレーボール',emoji:'🏐',url:'',desc:''},
+        // バドミントン系
+        {id:100,name:'同志社バドミントンサークル ドゥードゥー',block:'バドミントン',emoji:'🏸',url:'https://www.instagram.com/dudo_badminton__2025/',desc:''},
+        {id:101,name:'同志社バドミントン同好会',block:'バドミントン',emoji:'🏸',url:'',desc:''},
+        // 軽音系
+        {id:110,name:'同志社軽音 Nexus',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:111,name:'同志社軽音 SMMA',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:112,name:'同志社軽音 pants',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:113,name:'同志社軽音 ラジオノート',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:114,name:'同志社軽音 ひなたぼっこ',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:115,name:'同志社軽音 アンプラ',block:'軽音楽',emoji:'🎸',url:'',desc:''},
+        {id:116,name:'同志社ボカロ・アニソンサークル',block:'軽音楽',emoji:'🎵',url:'',desc:''},
+        // ボランティア・国際系
+        {id:120,name:'NASA（留学生交流）',block:'国際交流',emoji:'🌍',url:'',desc:''},
+        {id:121,name:'ASUVID',block:'ボランティア',emoji:'🤝',url:'',desc:''},
+        {id:122,name:'ARCO',block:'ボランティア',emoji:'🤝',url:'https://www.instagram.com/arco_kyotanabe/',desc:''},
+        {id:123,name:'そら',block:'ボランティア',emoji:'☁️',url:'',desc:''},
+        {id:124,name:'ルミナス',block:'ボランティア',emoji:'💫',url:'',desc:''},
+        {id:125,name:'DESA',block:'国際交流',emoji:'🌐',url:'',desc:''},
+      ];
+}
+function saveU(a) { localStorage.setItem('unofficial', JSON.stringify(a)); }
+function loadRatings() { try { return JSON.parse(localStorage.getItem('ratings')||'{}'); } catch(e) { return {}; } }
+function saveRatings(r) { localStorage.setItem('ratings', JSON.stringify(r)); }
+
+// ===== 評価 =====
+var RITEMS = ['活動の充実度','人間関係・雰囲気','活動頻度・拘束感','新歓の印象'];
+
+function getAvg(name) {
+  var r = loadRatings()[name];
+  if (!r || !r.length) return null;
+  var totals = [0,0,0,0], n = r.length;
+  r.forEach(function(e){ e.forEach(function(v,i){ totals[i]+=v; }); });
+  var overall = totals.reduce(function(a,b){return a+b;},0) / (n * RITEMS.length);
+  return { overall:overall, count:n, totals:totals };
+}
+function starsH(val) {
+  var s='';
+  for(var i=1;i<=5;i++) s += '<span style="color:'+(val>=i?'#f59e0b':'#d8c8f0')+';">★</span>';
+  return s;
+}
+function ratingHtml(name) {
+  var avg = getAvg(name);
+  var esc = name.replace(/'/g,"\\'");
+  if (!avg) return '<span style="font-size:.7rem;color:var(--muted);">未評価</span>';
+  var v = (Math.round(avg.overall*10)/10).toFixed(1);
+  return '<div class="ci-rat" onclick="openRDetail(\''+esc+'\')" title="タップで詳細">'
+    +'<span class="ci-stars">'+starsH(avg.overall)+'</span>'
+    +'<span class="ci-rv">'+v+' ('+avg.count+'件)</span>'
+    +'</div>';
+}
+
+var rCurrentClub='', rCurrentVals=[0,0,0,0];
+function openRModal(name) {
+  rCurrentClub=name; rCurrentVals=[0,0,0,0];
+  document.getElementById('rClubName').textContent=name;
+  renderRItems();
+  document.getElementById('rModal').classList.add('open');
+}
+function renderRItems() {
+  var h='';
+  RITEMS.forEach(function(label,idx){
+    h+='<div class="ritem"><div class="ritem-l">'+label+'</div><div class="rstars" id="rs'+idx+'"></div></div>';
+  });
+  document.getElementById('rItems').innerHTML=h;
+  RITEMS.forEach(function(_,idx){ renderStars(idx); });
+}
+function renderStars(idx) {
+  var c=document.getElementById('rs'+idx); if(!c)return;
+  var h='';
+  for(var s=1;s<=5;s++) h+='<span class="rstar'+(rCurrentVals[idx]>=s?' on':'')+'" onclick="setStars('+idx+','+s+')">★</span>';
+  c.innerHTML=h;
+}
+function setStars(idx,val){ rCurrentVals[idx]=val; renderStars(idx); }
+function submitRating() {
+  if(rCurrentVals.some(function(v){return v===0;})){alert('すべての項目を評価してください');return;}
+  var r=loadRatings(); if(!r[rCurrentClub])r[rCurrentClub]=[];
+  r[rCurrentClub].push(rCurrentVals.slice()); saveRatings(r);
+  document.getElementById('rModal').classList.remove('open');
+  renderMain();
+}
+function openUDetailModal(name) {
+  var clubs = loadU();
+  var c = clubs.find(function(x){ return x.name === name; });
+  if (!c) return;
+  var avg = getAvg(name);
+  var esc = name.replace(/'/g,"\\'");
+
+  // 評価セクション
+  var ratH = '<div><div class="sec-t">評価</div>';
+  if (avg) {
+    var ov = (Math.round(avg.overall*10)/10).toFixed(1);
+    ratH += '<div class="ro"><div class="ro-score">'+ov+'</div><div style="font-size:1.1rem;margin:.2rem 0;">'+starsH(avg.overall)+'</div><div style="font-size:.72rem;color:var(--muted);">'+avg.count+'件</div></div>';
+    RITEMS.forEach(function(label,i){
+      var v=avg.totals[i]/avg.count, pct=(v/5)*100;
+      ratH+='<div style="margin-bottom:.65rem;"><div class="ri-row"><span style="font-size:.78rem;font-weight:700;">'+label+'</span><span style="font-size:.72rem;color:var(--accent);">'+starsH(v)+' '+(Math.round(v*10)/10).toFixed(1)+'</span></div>'
+        +'<div class="ri-bar"><div class="ri-fill" style="width:'+pct+'%"></div></div></div>';
+    });
+  } else {
+    ratH += '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;">まだ評価がありません</div>';
+  }
+  ratH += '</div>';
+
+  // SNSリンク
+  var snsH = '';
+  if (c.url) {
+    var isInsta = c.url.includes('instagram');
+    var isTwitter = c.url.includes('twitter') || c.url.includes('x.com');
+    var icon = isInsta ? '📸' : isTwitter ? '𝕏' : '🌐';
+    var label = isInsta ? 'Instagramを見る' : isTwitter ? 'Twitterを見る' : 'Webサイトを見る';
+    snsH = '<div><div class="sec-t">SNS・リンク</div><div class="sns-row">'
+      +'<a class="sns-a" href="'+c.url+'" target="_blank" rel="noopener">'+icon+' '+label+'</a>'
+      +'</div></div>';
+  } else {
+    snsH = '<div><div class="sec-t">SNS・リンク</div>'
+      +'<div style="font-size:.82rem;color:var(--muted);">まだ登録されていません</div>'
+      +'</div>';
+  }
+
+  document.getElementById('dBox').innerHTML =
+    '<div class="dhd">'
+    +'<div><div class="dhd-em">'+c.emoji+'</div><div class="dhd-nm">'+c.name+'</div><div class="dhd-bl">自由サークル（非公認）・'+c.block+'</div></div>'
+    +'<button class="xbtn" onclick="closeDModal()">✕</button>'
+    +'</div>'
+    +'<div class="dbody">'
+    +'<div><div class="sec-t">サークル紹介</div><div class="sec-c">'+(c.desc||'紹介文はまだ登録されていません。')+'</div></div>'
+    +snsH
+    +ratH
+    +'<div class="dbtns">'
+    +'<button class="dbtn-r" onclick="closeDModal();openRModal(\''+esc+'\')">⭐ 評価する</button>'
+    +(c.url && c.url.includes('instagram') ? '<a class="dbtn-d" href="'+c.url+'" target="_blank" rel="noopener">📸 Instagramを開く</a>'
+      : c.url ? '<a class="dbtn-d" href="'+c.url+'" target="_blank" rel="noopener">公式ページ ↗</a>' : '')
+    +'</div>'
+    +'</div>';
+
+  document.getElementById('dModal').classList.add('open');
+}
+
+
+function openRDetail(name) {
+  var avg=getAvg(name); if(!avg)return;
+  var overall=(Math.round(avg.overall*10)/10).toFixed(1);
+  var esc=name.replace(/'/g,"\\'");
+  var h='<div class="rhd" style="border-radius:18px 18px 0 0;"><h3>📊 評価の詳細</h3><button class="xbtn" onclick="document.getElementById(\'rdModal\').classList.remove(\'open\')">✕</button></div>'
+    +'<div class="rbody"><div style="font-size:1rem;font-weight:900;margin-bottom:1rem;">'+name+'</div>'
+    +'<div class="ro"><div class="ro-score">'+overall+'</div><div style="font-size:1.1rem;margin:.2rem 0;">'+starsH(avg.overall)+'</div><div style="font-size:.72rem;color:var(--muted);">'+avg.count+'件の評価</div></div>';
+  RITEMS.forEach(function(label,i){
+    var v=avg.totals[i]/avg.count, pct=(v/5)*100;
+    h+='<div style="margin-bottom:.75rem;"><div class="ri-row"><span style="font-size:.8rem;font-weight:700;">'+label+'</span><span style="font-size:.75rem;color:var(--accent);font-weight:900;">'+starsH(v)+' '+(Math.round(v*10)/10).toFixed(1)+'</span></div>'
+      +'<div class="ri-bar"><div class="ri-fill" style="width:'+pct+'%"></div></div></div>';
+  });
+  h+='<button class="rsub" onclick="document.getElementById(\'rdModal\').classList.remove(\'open\');openRModal(\''+esc+'\')">⭐ 自分も評価する</button></div>';
+  document.getElementById('rdBox').innerHTML=h;
+  document.getElementById('rdModal').classList.add('open');
+}
+
+// ===== 詳細モーダル =====
+async function openDModal(name, emoji, url, block) {
+  var info = loadInfo()[name]||{};
+  var avg = getAvg(name);
+  var esc = name.replace(/'/g,"\\'");
+
+  // SNS
+  var snsH='';
+  if(info.twitter||info.instagram||info.line||info.website) {
+    snsH='<div><div class="sec-t">SNS・リンク</div><div class="sns-row">'
+      +(info.twitter?'<a class="sns-a" href="'+info.twitter+'" target="_blank">𝕏 Twitter</a>':'')
+      +(info.instagram?'<a class="sns-a" href="'+info.instagram+'" target="_blank">📸 Instagram</a>':'')
+      +(info.line?'<a class="sns-a" href="'+info.line+'" target="_blank">💬 LINE</a>':'')
+      +(info.website?'<a class="sns-a" href="'+info.website+'" target="_blank">🌐 Web</a>':'')
+      +'</div></div>';
+  }
+
+  // 募集
+  var badge = info.recruiting==='true'
+    ? '<span class="badge rec">✅ メンバー募集中</span>'
+    : info.recruiting==='false'
+    ? '<span class="badge cls">🔒 募集停止中</span>'
+    : '<span class="badge" style="background:var(--tag);color:var(--muted);">📋 情報未登録</span>';
+
+  // 評価
+  var ratH='<div><div class="sec-t">評価</div>';
+  if(avg){
+    var ov=(Math.round(avg.overall*10)/10).toFixed(1);
+    ratH+='<div class="ro"><div class="ro-score">'+ov+'</div><div style="font-size:1.1rem;margin:.2rem 0;">'+starsH(avg.overall)+'</div><div style="font-size:.72rem;color:var(--muted);">'+avg.count+'件</div></div>';
+    RITEMS.forEach(function(label,i){
+      var v=avg.totals[i]/avg.count, pct=(v/5)*100;
+      ratH+='<div style="margin-bottom:.65rem;"><div class="ri-row"><span style="font-size:.78rem;font-weight:700;">'+label+'</span><span style="font-size:.72rem;color:var(--accent);">'+starsH(v)+' '+(Math.round(v*10)/10).toFixed(1)+'</span></div>'
+        +'<div class="ri-bar"><div class="ri-fill" style="width:'+pct+'%"></div></div></div>';
+    });
+  } else {
+    ratH+='<div style="text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;">まだ評価がありません</div>';
+  }
+  ratH+='</div>';
+
+  // 編集フォーム
+  var editH = canEdit(name)
+    ? '<details style="margin-top:.5rem;"><summary style="font-size:.72rem;color:var(--muted);cursor:pointer;font-weight:700;">⚙️ 情報を編集する</summary>'
+      +'<div style="margin-top:.85rem;display:flex;flex-direction:column;gap:.65rem;">'
+      +'<div class="fld"><label>紹介文</label><input id="de-desc" type="text" value="'+(info.desc||'')+'" placeholder="サークルの紹介文"></div>'
+      +'<div class="fld2"><div class="fld"><label>活動日</label><input id="de-days" type="text" value="'+(info.days||'')+'" placeholder="例：火・金曜日"></div>'
+      +'<div class="fld"><label>場所</label><input id="de-place" type="text" value="'+(info.place||'')+'" placeholder="例：今出川キャンパス"></div>'
+      +'<div class="fld"><label>費用</label><input id="de-fee" type="text" value="'+(info.fee||'')+'" placeholder="例：月¥500"></div>'
+      +'<div class="fld"><label>メンバー数</label><input id="de-members" type="text" value="'+(info.members||'')+'" placeholder="例：30名"></div></div>'
+      +'<div class="fld"><label>募集状況</label><select id="de-rec"><option value="">未設定</option><option value="true"'+(info.recruiting==='true'?' selected':'')+'>募集中</option><option value="false"'+(info.recruiting==='false'?' selected':'')+'>募集停止</option></select></div>'
+      +'<div class="fld"><label>Twitter/X URL</label><input id="de-tw" type="url" value="'+(info.twitter||'')+'" placeholder="https://x.com/..."></div>'
+      +'<div class="fld"><label>Instagram URL</label><input id="de-ig" type="url" value="'+(info.instagram||'')+'" placeholder="https://instagram.com/..."></div>'
+      +'<div class="fld"><label>LINE URL</label><input id="de-line" type="url" value="'+(info.line||'')+'" placeholder="https://line.me/..."></div>'
+      +'<div class="fld"><label>WebサイトURL</label><input id="de-web" type="url" value="'+(info.website||'')+'" placeholder="https://..."></div>'
+      +'<button onclick="saveDInfo(\''+esc+'\')" style="padding:.6rem;background:linear-gradient(135deg,#1e3a5f,#2d4a7a);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;">保存する</button>'
+      +'</div></details>'
+    : currentUser
+      ? '<div style="font-size:.75rem;color:var(--muted);text-align:center;padding:.5rem;">このサークルの編集権限がありません。<br><a href="#" onclick="event.preventDefault();closeDModal();openCircleSelectModal();" style="color:var(--accent);font-weight:700;">担当サークルを変更する</a></div>'
+      : '<div style="font-size:.75rem;color:var(--muted);text-align:center;padding:.5rem;"><a href="#" onclick="event.preventDefault();closeDModal();openAuthModal();" style="color:var(--accent);font-weight:700;">ログイン</a>すると情報を編集できます</div>';
+
+  document.getElementById('dBox').innerHTML =
+    '<div class="dhd">'
+    +'<div><div class="dhd-em">'+(emoji||'🎓')+'</div><div class="dhd-nm">'+name+'</div><div class="dhd-bl">'+block+'</div></div>'
+    +'<button class="xbtn" onclick="closeDModal()">✕</button>'
+    +'</div>'
+    +'<div class="dbody">'
+    +'<div><div class="sec-t">サークル紹介</div><div class="sec-c">'+(info.desc||'紹介文はまだ登録されていません。')+'</div></div>'
+    +'<div><div class="sec-t">活動情報</div><div class="mg">'
+    +'<div class="mi"><div class="mi-l">活動日</div><div class="mi-v">'+(info.days||'—')+'</div></div>'
+    +'<div class="mi"><div class="mi-l">場所</div><div class="mi-v">'+(info.place||'—')+'</div></div>'
+    +'<div class="mi"><div class="mi-l">費用</div><div class="mi-v">'+(info.fee||'—')+'</div></div>'
+    +'<div class="mi"><div class="mi-l">メンバー数</div><div class="mi-v">'+(info.members||'—')+'</div></div>'
+    +'</div></div>'
+    +'<div><div class="sec-t">募集状況</div>'+badge+'</div>'
+    +snsH
+    +ratH
+    +'<div class="dbtns">'
+    +'<button class="dbtn-r" onclick="closeDModal();openRModal(\''+esc+'\')">⭐ 評価する</button>'
+    +'<a class="dbtn-d" href="'+(url||'#')+'" target="_blank">D-Live公式 ↗</a>'
+    +'</div>'
+    +editH
+    // 新歓カレンダー
+    +'<div><div class="sec-t">🌸 新歓カレンダー</div>'
+    +'<div id="evtCal">読み込み中...</div>'
+    +(canEdit(name)
+      ? '<details style="margin-top:.75rem;"><summary style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:700;">＋ 新歓イベントを追加する</summary>'
+        +'<div style="margin-top:.75rem;display:flex;flex-direction:column;gap:.55rem;">'
+        +'<div class="fld"><label>イベント名</label><input id="evtTitle" type="text" placeholder="例：新歓BBQ、説明会、体験練習"></div>'
+        +'<div class="fld2"><div class="fld"><label>日付</label><input id="evtDate" type="date"></div>'
+        +'<div class="fld"><label>時間</label><input id="evtTime" type="text" placeholder="14:00〜17:00"></div></div>'
+        +'<div class="fld"><label>場所</label><input id="evtPlace" type="text" placeholder="例：今出川キャンパス 学生会館"></div>'
+        +'<div class="fld"><label>詳細・メモ</label><input id="evtDesc" type="text" placeholder="例：参加費無料、事前申込不要"></div>'
+        +'<button onclick="submitEvent(\''+esc+'\')" style="padding:.6rem;background:linear-gradient(135deg,#c026d3,#7c3aed);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;">イベントを追加する</button>'
+        +'</div></details>'
+      : '')
+    +'</div>'
+    // コメント
+    +'<div><div class="sec-t">コメント</div>'
+    +'<div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem;">'
+    +'<input id="cmtNick" type="text" placeholder="ニックネーム" style="padding:.45rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;">'
+    +'<textarea id="cmtBody" placeholder="このサークルについてコメントしよう" rows="3" style="padding:.45rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;resize:vertical;"></textarea>'
+    +'<button onclick="submitComment(\''+esc+'\')" style="padding:.55rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;">投稿する</button>'
+    +'</div><div id="cmtList" style="color:var(--muted);font-size:.8rem;text-align:center;">読み込み中...</div>'
+    +'</div>'
+    +'</div>';
+
+  document.getElementById('dModal').classList.add('open');
+  loadEvents(name);
+  loadComments(name);
+}
+function closeDModal() { document.getElementById('dModal').classList.remove('open'); }
+
+async function saveDInfo(name) {
+  var d = loadInfo();
+  d[name] = {
+    desc: document.getElementById('de-desc').value.trim(),
+    days: document.getElementById('de-days').value.trim(),
+    place: document.getElementById('de-place').value.trim(),
+    fee: document.getElementById('de-fee').value.trim(),
+    members: document.getElementById('de-members').value.trim(),
+    recruiting: document.getElementById('de-rec').value,
+    twitter: document.getElementById('de-tw').value.trim(),
+    instagram: document.getElementById('de-ig').value.trim(),
+    line: document.getElementById('de-line').value.trim(),
+    website: document.getElementById('de-web').value.trim()
+  };
+  saveInfo(d);
+  if(currentUser) {
+    await sb.from('circle_profiles').upsert({
+      club_name:name, description:d[name].desc, days:d[name].days, place:d[name].place,
+      fee:d[name].fee, members:d[name].members, recruiting:d[name].recruiting==='true',
+      twitter:d[name].twitter, instagram:d[name].instagram, line_url:d[name].line, website:d[name].website
+    }, {onConflict:'club_name'});
+  }
+  closeDModal();
+  renderMain();
+}
+
+// ===== コメント =====
+async function loadComments(clubName) {
+  var c = document.getElementById('cmtList'); if(!c)return;
+  var comments=[];
+  try {
+    var res = await sb.from('comments').select('*').eq('club_name',clubName).order('created_at',{ascending:false});
+    comments = res.data||[];
+  } catch(e) {}
+  if(!comments.length){c.textContent='まだコメントがありません。最初の投稿をどうぞ！';return;}
+  c.innerHTML=comments.map(function(cm){
+    var dt=new Date(cm.created_at).toLocaleDateString('ja-JP');
+    return '<div style="padding:.75rem 0;border-bottom:1px solid var(--border);">'
+      +'<div style="display:flex;justify-content:space-between;margin-bottom:.25rem;">'
+      +'<span style="font-size:.8rem;font-weight:700;">'+cm.nickname+'</span>'
+      +'<span style="font-size:.7rem;color:var(--muted);">'+dt+'</span>'
+      +'</div><div style="font-size:.85rem;line-height:1.65;">'+cm.body+'</div></div>';
+  }).join('');
+}
+async function submitComment(clubName) {
+  var nick=document.getElementById('cmtNick').value.trim();
+  var body=document.getElementById('cmtBody').value.trim();
+  if(!nick){alert('ニックネームを入力してください');return;}
+  if(!body){alert('コメントを入力してください');return;}
+  try { await sb.from('comments').insert({club_name:clubName,nickname:nick,body:body}); } catch(e){}
+  document.getElementById('cmtNick').value='';
+  document.getElementById('cmtBody').value='';
+  loadComments(clubName);
+}
+
+// ===== 新歓カレンダー =====
+var calEvents=[], calClub='', calYear=0, calMonth=0;
+
+async function loadEvents(clubName) {
+  calClub=clubName;
+  var now=new Date(); calYear=now.getFullYear(); calMonth=now.getMonth();
+  var events=[];
+  try {
+    var res=await sb.from('events').select('*').eq('club_name',clubName).order('event_date',{ascending:true});
+    events=res.data||[];
+  } catch(e){}
+  calEvents=events;
+  renderCal();
+}
+
+function renderCal() {
+  var c=document.getElementById('evtCal'); if(!c)return;
+  var WD=['日','月','火','水','木','金','土'];
+  var MN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  var today=new Date().toISOString().slice(0,10);
+
+  // イベントマップ
+  var em={};
+  calEvents.forEach(function(e){ if(!em[e.event_date])em[e.event_date]=[]; em[e.event_date].push(e); });
+
+  var fd=new Date(calYear,calMonth,1).getDay();
+  var dim=new Date(calYear,calMonth+1,0).getDate();
+
+  // 曜日ヘッダー
+  var hdrs=WD.map(function(w,i){
+    var col=i===0?'#e11d48':i===6?'#2563eb':'var(--muted)';
+    return '<div style="text-align:center;font-size:.68rem;font-weight:700;color:'+col+';padding:.25rem 0;">'+w+'</div>';
+  }).join('');
+
+  // 空白
+  var cells='';
+  for(var i=0;i<fd;i++) cells+='<div></div>';
+
+  // 日付
+  for(var d=1;d<=dim;d++){
+    var mm=String(calMonth+1).padStart(2,'0'), dd=String(d).padStart(2,'0');
+    var dk=calYear+'-'+mm+'-'+dd;
+    var isT=dk===today, hasE=!!em[dk];
+    var dw=new Date(calYear,calMonth,d).getDay();
+    var tc=dw===0?'#e11d48':dw===6?'#2563eb':'var(--ink)';
+    var dot=hasE?'<div style="display:flex;justify-content:center;gap:2px;margin-top:1px;">'
+      +em[dk].slice(0,3).map(function(){return '<div style="width:5px;height:5px;background:'+(isT?'#fff':'var(--accent)')+';border-radius:50%;"></div>';}).join('')
+      +'</div>':'';
+    cells+='<div onclick="'+(hasE?'showDay(\''+dk+'\')':'')+'" style="text-align:center;padding:.25rem .05rem;border-radius:6px;cursor:'+(hasE?'pointer':'default')+';min-height:2rem;'+(isT?'background:var(--accent);':hasE?'background:#f3e8ff;':'')+'">'
+      +'<div style="font-size:.8rem;font-weight:'+(isT||hasE?'900':'400')+';color:'+(isT?'#fff':tc)+';">'+d+'</div>'
+      +dot+'</div>';
+  }
+
+  // 今後のイベントリスト
+  var upcoming=calEvents.filter(function(e){return e.event_date>=today;}).slice(0,5);
+  var upH='';
+  if(upcoming.length){
+    upH='<div style="margin-top:.75rem;"><div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.4rem;">今後の予定</div>'
+      +upcoming.map(function(e){
+        var dd=new Date(e.event_date+'T00:00:00');
+        var ds=(dd.getMonth()+1)+'月'+dd.getDate()+'日（'+WD[dd.getDay()]+'）';
+        var esc2=calClub.replace(/'/g,"\\'");
+        var del=currentUser?'<button onclick="deleteEvt(\''+e.id+'\',\''+esc2+'\')" style="font-size:.62rem;color:#c0392b;background:none;border:none;cursor:pointer;padding:0 .3rem;flex-shrink:0;">×</button>':'';
+        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.4rem .6rem;background:#fdf4ff;border-radius:8px;margin-bottom:.3rem;border:1px solid #e9d5ff;">'
+          +'<div style="font-size:.72rem;font-weight:900;color:var(--accent);flex-shrink:0;">'+ds+'</div>'
+          +'<div style="flex:1;font-size:.78rem;font-weight:700;">🌸 '+e.title+'</div>'
+          +(e.event_time?'<div style="font-size:.68rem;color:var(--muted);flex-shrink:0;">'+e.event_time+'</div>':'')
+          +del+'</div>';
+      }).join('')+'</div>';
+  }
+
+  var esc=calClub.replace(/'/g,"\\'");
+  c.innerHTML=
+    '<div class="cal-nav">'
+    +'<button onclick="changeMonth(-1)">‹</button>'
+    +'<span>'+calYear+'年 '+MN[calMonth]+'</span>'
+    +'<button onclick="changeMonth(1)">›</button>'
+    +'</div>'
+    +'<div class="cal-grid">'+hdrs+cells+'</div>'
+    +upH;
+}
+
+function changeMonth(d) { calMonth+=d; if(calMonth>11){calMonth=0;calYear++;}else if(calMonth<0){calMonth=11;calYear--;} renderCal(); }
+
+function showDay(dk) {
+  var evts=calEvents.filter(function(e){return e.event_date===dk;}); if(!evts.length)return;
+  var dd=new Date(dk+'T00:00:00');
+  var WD=['日','月','火','水','木','金','土'];
+  var ds=(dd.getMonth()+1)+'月'+dd.getDate()+'日（'+WD[dd.getDay()]+'）';
+  alert(ds+'\n\n'+evts.map(function(e){
+    return '🌸 '+e.title+(e.event_time?' '+e.event_time:'')+(e.place?'\n📍 '+e.place:'')+(e.description?'\n📝 '+e.description:'');
+  }).join('\n\n'));
+}
+
+async function submitEvent(clubName) {
+  var title=document.getElementById('evtTitle').value.trim();
+  var date=document.getElementById('evtDate').value;
+  var time=document.getElementById('evtTime').value.trim();
+  var place=document.getElementById('evtPlace').value.trim();
+  var desc=document.getElementById('evtDesc').value.trim();
+  if(!title){alert('イベント名を入力してください');return;}
+  if(!date){alert('日付を選択してください');return;}
+  try {
+    var res=await sb.from('events').insert({club_name:clubName,title:title,event_date:date,event_time:time,place:place,description:desc});
+    if(res.error){alert('エラー: '+res.error.message);return;}
+  } catch(e){alert('エラーが発生しました');return;}
+  document.getElementById('evtTitle').value='';
+  document.getElementById('evtDate').value='';
+  document.getElementById('evtTime').value='';
+  document.getElementById('evtPlace').value='';
+  document.getElementById('evtDesc').value='';
+  calEvents.push({id:Date.now().toString(),club_name:clubName,title:title,event_date:date,event_time:time,place:place,description:desc});
+  renderCal();
+}
+
+async function deleteEvt(id, clubName) {
+  if(!confirm('このイベントを削除しますか？'))return;
+  try { await sb.from('events').delete().eq('id',id); } catch(e){}
+  calEvents=calEvents.filter(function(e){return e.id!==id;});
+  renderCal();
+}
+
+// ===== マイ新歓カレンダー =====
+var myCalCollapsed = false;
+var myCalYear = new Date().getFullYear();
+var myCalMonth = new Date().getMonth();
+
+async function loadMyCal() {
+  var keeps = loadKeeps();
+  var allEvents = [];
+
+  if (keeps.length) {
+    try {
+      var res = await sb.from('events').select('*').in('club_name', keeps).order('event_date', {ascending: true});
+      allEvents = res.data || [];
+    } catch(e) {}
+  }
+
+  document.getElementById('myCalSection').style.display = 'block';
+  document.getElementById('myCalEmpty').style.display = 'none';
+  document.getElementById('myCalGrid').style.display = 'block';
+  window.myCalEvents = allEvents;
+  renderMyCal(allEvents);
+}
+
+function renderMyCal(events) {
+  var WD = ['日','月','火','水','木','金','土'];
+  var MN = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  var today = new Date().toISOString().slice(0,10);
+
+  // イベントマップ
+  var em = {};
+  events.forEach(function(e) {
+    if (!em[e.event_date]) em[e.event_date] = [];
+    em[e.event_date].push(e);
+  });
+
+  var fd = new Date(myCalYear, myCalMonth, 1).getDay();
+  var dim = new Date(myCalYear, myCalMonth+1, 0).getDate();
+
+  var hdrs = WD.map(function(w,i){
+    var col = i===0?'#e11d48':i===6?'#2563eb':'var(--muted)';
+    return '<div style="text-align:center;font-size:.68rem;font-weight:700;color:'+col+';padding:.25rem 0;">'+w+'</div>';
+  }).join('');
+
+  var cells = '';
+  for (var i=0; i<fd; i++) cells += '<div></div>';
+  for (var d=1; d<=dim; d++) {
+    var mm = String(myCalMonth+1).padStart(2,'0'), dd = String(d).padStart(2,'0');
+    var dk = myCalYear+'-'+mm+'-'+dd;
+    var isT = dk===today, hasE = !!em[dk];
+    var dw = new Date(myCalYear, myCalMonth, d).getDay();
+    var tc = dw===0?'#e11d48':dw===6?'#2563eb':'var(--ink)';
+    var dot = hasE ? '<div style="display:flex;justify-content:center;gap:2px;margin-top:1px;">'
+      +em[dk].slice(0,3).map(function(){return '<div style="width:5px;height:5px;background:'+(isT?'#fff':'#db2777')+';border-radius:50%;"></div>';}).join('')
+      +'</div>' : '';
+    cells += '<div onclick="'+(hasE?'showMyDay(\''+dk+'\',myCalEvents)':'')+'" '
+      +'style="text-align:center;padding:.25rem .05rem;border-radius:6px;cursor:'+(hasE?'pointer':'default')+';min-height:2rem;'
+      +(isT?'background:var(--accent);':hasE?'background:#fdf2f8;':'')+'">'
+      +'<div style="font-size:.8rem;font-weight:'+(isT||hasE?'900':'400')+';color:'+(isT?'#fff':tc)+';">'+d+'</div>'
+      +dot+'</div>';
+  }
+
+  // 今後のイベントリスト（キープサークル）
+  var keeps = loadKeeps();
+  var upcoming = events.filter(function(e){return e.event_date>=today;}).slice(0,5);
+  var upH = '';
+  if (!keeps.length) {
+    upH = '<div style="margin-top:.75rem;text-align:center;padding:.75rem;background:#fdf2f8;border-radius:8px;border:1px solid #fbcfe8;font-size:.82rem;color:#db2777;font-weight:700;">❤️ 気になるサークルをキープすると、新歓イベントがここに表示されます！</div>';
+  } else if (!upcoming.length) {
+    upH = '<div style="margin-top:.75rem;text-align:center;padding:.75rem;background:var(--tag);border-radius:8px;font-size:.82rem;color:var(--muted);">キープ中のサークルにまだ新歓イベントが登録されていません</div>';
+  } else {
+    upH = '<div style="margin-top:.75rem;"><div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;color:#db2777;text-transform:uppercase;margin-bottom:.4rem;">キープ中サークルの今後の予定</div>'
+      +upcoming.map(function(e){
+        var dd2 = new Date(e.event_date+'T00:00:00');
+        var ds = (dd2.getMonth()+1)+'月'+dd2.getDate()+'日（'+WD[dd2.getDay()]+'）';
+        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.4rem .6rem;background:#fdf2f8;border-radius:8px;margin-bottom:.3rem;border:1px solid #fbcfe8;">'
+          +'<div style="font-size:.72rem;font-weight:900;color:#db2777;flex-shrink:0;">'+ds+'</div>'
+          +'<div style="flex:1;min-width:0;">'
+          +'<div style="font-size:.78rem;font-weight:700;">🌸 '+e.title+'</div>'
+          +'<div style="font-size:.68rem;color:var(--muted);">'+e.club_name+'</div>'
+          +'</div>'
+          +(e.event_time?'<div style="font-size:.68rem;color:var(--muted);flex-shrink:0;">'+e.event_time+'</div>':'')
+          +'</div>';
+      }).join('')+'</div>';
+  }
+
+  window.myCalEvents = events;
+  document.getElementById('myCalGrid').innerHTML =
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;">'
+    +'<button onclick="changeMyCalMonth(-1)" style="background:var(--tag);border:none;border-radius:6px;padding:.25rem .6rem;cursor:pointer;font-size:.9rem;">‹</button>'
+    +'<span style="font-weight:900;font-size:.88rem;">'+myCalYear+'年 '+MN[myCalMonth]+'</span>'
+    +'<button onclick="changeMyCalMonth(1)" style="background:var(--tag);border:none;border-radius:6px;padding:.25rem .6rem;cursor:pointer;font-size:.9rem;">›</button>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">'+hdrs+cells+'</div>'
+    +upH;
+}
+
+function changeMyCalMonth(d) {
+  myCalMonth += d;
+  if (myCalMonth > 11) { myCalMonth=0; myCalYear++; }
+  else if (myCalMonth < 0) { myCalMonth=11; myCalYear--; }
+  if (window.myCalEvents) renderMyCal(window.myCalEvents);
+}
+
+function showMyDay(dk, events) {
+  var evts = events.filter(function(e){return e.event_date===dk;});
+  if (!evts.length) return;
+  var WD = ['日','月','火','水','木','金','土'];
+  var dd2 = new Date(dk+'T00:00:00');
+  var ds = (dd2.getMonth()+1)+'月'+dd2.getDate()+'日（'+WD[dd2.getDay()]+'）';
+  alert(ds+'\n\n'+evts.map(function(e){
+    return '【'+e.club_name+'】\n🌸 '+e.title+(e.event_time?' '+e.event_time:'')+(e.place?'\n📍 '+e.place:'')+(e.description?'\n📝 '+e.description:'');
+  }).join('\n\n'));
+}
+
+function toggleMyCal() {
+  myCalCollapsed = !myCalCollapsed;
+  document.getElementById('myCalBody').style.display = myCalCollapsed ? 'none' : 'block';
+  document.getElementById('myCalToggle').textContent = myCalCollapsed ? '開く' : '折りたたむ';
+}
+
+
+function loadInc() {
+  try {
+    var stored = JSON.parse(localStorage.getItem('incale')||'[]');
+    // 初期データが未登録の場合のみ追加
+    if (stored.length === 0) {
+      var defaults = [
+        {id:1, name:'TalkMates', block:'国際交流', base:'同志社・同女', emoji:'🌍', join:'doshisha', url:'', desc:'同志社・同女の約200人で構成。日本人学生と留学生が交流できるイベントを多数開催。'},
+        {id:2, name:'BLC（ボランティア）', block:'ボランティア', base:'同志社・同女・他大学', emoji:'🤝', join:'doshisha', url:'', desc:'同志社公認のインカレボランティアサークル。2回生・3回生からの入会も大歓迎。'},
+        {id:3, name:'LEM（軽音）', block:'軽音楽', base:'同志社・同女・他大学', emoji:'🎸', join:'yes', url:'', desc:'2011年創設。オールジャンルで150人規模。同女・他大学もOK。初心者・2回生以上歓迎。'},
+        {id:4, name:'京炎 そでふれ！咲産華', block:'よさこい', base:'同志社・立命・京大など', emoji:'🎆', join:'yes', url:'', desc:'主に同志社・同志社女子・大谷大学の学生で構成されるよさこいインカレサークル。'},
+        {id:5, name:'WhiteLine（テニス）', block:'テニス', base:'京大・同志社・立命・同女など', emoji:'🎾', join:'yes', url:'https://whiteline-kyoto.com/', desc:'京大公認インカレテニスサークル。同志社生参加可。100人規模、男女比1:1、週2〜3回。初心者歓迎。'},
+        {id:6, name:'FleeGarden（総合スポーツ）', block:'スポーツ', base:'京大・同志社・同女・工繊など', emoji:'🏐', join:'yes', url:'', desc:'京大インカレ総合スポーツサークル。バレー・バスケ・卓球・バドミントン・フットサルなど。年会費2000円。年中入会可。'},
+        {id:7, name:'L.E.D.（バスケ）', block:'バスケットボール', base:'京大・京女・同志社・京産など', emoji:'🏀', join:'yes', url:'', desc:'京大公認インカレバスケサークル。初心者から社会人リーグ参加者まで。イベント多数。'},
+        {id:8, name:'RED×BLUE（イベント）', block:'イベント・交流', base:'京大・同志社・工繊・同女・立命など', emoji:'🎉', join:'yes', url:'https://www.instagram.com/redblue.kyoto.u/', desc:'京都大学インカレイベントサークル。週1程度で活動。大学・回生・性別関係なし。年中入会受付。'},
+        {id:9, name:'国際ボランティア団体CHAD', block:'ボランティア・国際', base:'同志社・同女', emoji:'🌱', join:'doshisha', url:'', desc:'同志社大学・同志社女子大学の学生150名が所属する国際ボランティア団体。'},
+        {id:10, name:'指薪会（剣道）', block:'剣道', base:'京都圏各大学', emoji:'⚔️', join:'yes', url:'', desc:'やりたい時に剣道をするインカレサークル。関西リーグ優勝を目標に活動。'}
+      ];
+      localStorage.setItem('incale', JSON.stringify(defaults));
+      return defaults;
+    }
+    return stored;
+  } catch(e) { return []; }
+}
+function saveInc(a) { localStorage.setItem('incale', JSON.stringify(a)); }
+var editIncId=null;
+function openIncModal(id) {
+  var clubs=loadInc(), c=id!=null?clubs.find(function(x){return x.id===id;}):null;
+  editIncId=id;
+  document.getElementById('incModalTitle').textContent=c?'インカレサークルを編集':'インカレサークルを追加';
+  document.getElementById('incName').value  =c?c.name:'';
+  document.getElementById('incBlock').value =c?c.block:'';
+  document.getElementById('incBase').value  =c?(c.base||''):'';
+  document.getElementById('incEmoji').value =c?(c.emoji||'🌍'):'🌍';
+  document.getElementById('incJoin').value  =c?(c.join||'yes'):'yes';
+  document.getElementById('incUrl').value   =c?(c.url||''):'';
+  document.getElementById('incDesc').value  =c?(c.desc||''):'';
+  document.getElementById('incModal').classList.add('open');
+}
+function closeIncModal(){document.getElementById('incModal').classList.remove('open');editIncId=null;}
+function saveIncClub(){
+  var name=document.getElementById('incName').value.trim();
+  var block=document.getElementById('incBlock').value.trim();
+  var base=document.getElementById('incBase').value.trim();
+  var emoji=document.getElementById('incEmoji').value.trim()||'🌍';
+  var join=document.getElementById('incJoin').value;
+  var url=document.getElementById('incUrl').value.trim();
+  var desc=document.getElementById('incDesc').value.trim();
+  if(!name){alert('サークル名を入力してください');return;}
+  if(!block){alert('ジャンルを入力してください');return;}
+  var clubs=loadInc();
+  if(editIncId!=null){var i=clubs.findIndex(function(c){return c.id===editIncId;});if(i!==-1)clubs[i]=Object.assign({},clubs[i],{name:name,block:block,base:base,emoji:emoji,join:join,url:url,desc:desc});}
+  else clubs.push({id:Date.now(),name:name,block:block,base:base,emoji:emoji,join:join,url:url,desc:desc});
+  saveInc(clubs);closeIncModal();renderMain();
+}
+function deleteIncClub(id){if(!confirm('削除しますか？'))return;saveInc(loadInc().filter(function(c){return c.id!==id;}));renderMain();}
+
+// ===== 非公認団体 =====
+var editId=null;
+function openUModal(id) {
+  var clubs=loadU(), c=id!=null?clubs.find(function(x){return x.id===id;}):null;
+  editId=id;
+  document.getElementById('uModalTitle').textContent=c?'自由サークルを追加':'自由サークルを追加';
+  document.getElementById('uName').value=c?c.name:'';
+  document.getElementById('uBlock').value=c?c.block:'';
+  document.getElementById('uEmoji').value=c?c.emoji:'🎓';
+  document.getElementById('uUrl').value=c?(c.url||''):'';
+  document.getElementById('uDesc').value=c?(c.desc||''):'';
+  document.getElementById('uModal').classList.add('open');
+}
+function closeUModal(){document.getElementById('uModal').classList.remove('open');editId=null;}
+function saveUClub(){
+  var name=document.getElementById('uName').value.trim();
+  var block=document.getElementById('uBlock').value.trim();
+  var emoji=document.getElementById('uEmoji').value.trim()||'🎓';
+  var url=document.getElementById('uUrl').value.trim();
+  var desc=document.getElementById('uDesc').value.trim();
+  if(!name){alert('団体名を入力してください');return;}
+  if(!block){alert('カテゴリを入力してください');return;}
+  var clubs=loadU();
+  if(editId!=null){var i=clubs.findIndex(function(c){return c.id===editId;});if(i!==-1)clubs[i]=Object.assign({},clubs[i],{name:name,block:block,emoji:emoji,url:url,desc:desc});}
+  else clubs.push({id:Date.now(),name:name,block:block,emoji:emoji,url:url,desc:desc});
+  saveU(clubs); closeUModal(); renderMain();
+}
+function deleteUClub(id){if(!confirm('削除しますか？'))return;saveU(loadU().filter(function(c){return c.id!==id;}));renderMain();}
+
+// ===== キープ機能 =====
+function loadKeeps() { try { return JSON.parse(localStorage.getItem('keeps')||'[]'); } catch(e) { return []; } }
+function saveKeeps(a) { localStorage.setItem('keeps', JSON.stringify(a)); }
+function isKept(name) { return loadKeeps().indexOf(name) !== -1; }
+function toggleKeep(name) {
+  var keeps = loadKeeps();
+  var idx = keeps.indexOf(name);
+  if (idx === -1) keeps.push(name);
+  else keeps.splice(idx, 1);
+  saveKeeps(keeps);
+  renderMain();
+  loadMyCal();
+}
+
+
+var curFilter='all';
+function renderMain(){
+  var q=document.getElementById('searchInput').value.trim().toLowerCase();
+  var main=document.getElementById('mainContent');
+  var html='', total=0;
+
+  DATA.forEach(function(cat){
+    if(curFilter!=='all'&&cat.key!==curFilter)return;
+    var cH='', cC=0;
+    cat.blocks.forEach(function(bl){
+      var clubs=q?bl.clubs.filter(function(c){return c[0].toLowerCase().includes(q);}):bl.clubs;
+      if(!clubs.length)return;
+      cC+=clubs.length;
+      cH+='<div class="blk-hd">'+bl.b+'</div>';
+      clubs.forEach(function(c){
+        var esc=c[0].replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        var ratH=ratingHtml(c[0]);
+        var kept=isKept(c[0]);
+        cH+='<div class="ci">'
+          +'<div class="ci-em">'+c[1]+'</div>'
+          +'<div class="ci-nm" onclick="openDModal(\''+esc+'\',\''+c[1]+'\',\''+c[2]+'\',\''+bl.b+'\')">'+c[0]+'</div>'
+          +ratH
+          +'<button class="heart'+(kept?' on':'')+'" onclick="toggleKeep(\''+esc+'\')" title="キープ">'+(kept?'❤️':'🤍')+'</button>'
+          +'<button class="ci-rbtn" onclick="openRModal(\''+esc+'\')">評価</button>'
+          +'<a class="ci-lnk" href="'+c[2]+'" target="_blank" rel="noopener">詳細↗</a>'
+          +'</div>';
+      });
+    });
+    if(!cC)return;
+    total+=cC;
+    html+='<section class="cat-sec" id="cat-'+cat.key+'">'
+      +'<div class="cat-hd"><span class="icon">'+cat.icon+'</span><span class="title">'+cat.cat+'</span><span class="cnt">'+cC+'団体</span></div>'
+      +'<div class="clist">'+cH+'</div></section>';
+  });
+
+  // キープ一覧
+  if (curFilter === 'keep') {
+    var keeps = loadKeeps();
+    var keepItems = [];
+    DATA.forEach(function(cat) {
+      cat.blocks.forEach(function(bl) {
+        bl.clubs.forEach(function(c) {
+          if (keeps.indexOf(c[0]) !== -1 && (!q || c[0].toLowerCase().includes(q))) {
+            keepItems.push({ c:c, bl:bl });
+          }
+        });
+      });
+    });
+    var kH = '';
+    if (!keepItems.length) {
+      kH = '<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:.85rem;">まだキープしたサークルがありません。<br>気になるサークルの🤍を押してみましょう！</div>';
+    } else {
+      keepItems.forEach(function(item) {
+        var c=item.c, bl=item.bl;
+        var esc=c[0].replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        var ratH=ratingHtml(c[0]);
+        kH+='<div class="ci">'
+          +'<div class="ci-em">'+c[1]+'</div>'
+          +'<div class="ci-nm" onclick="openDModal(\''+esc+'\',\''+c[1]+'\',\''+c[2]+'\',\''+bl.b+'\')">'+c[0]+'</div>'
+          +ratH
+          +'<button class="heart on" onclick="toggleKeep(\''+esc+'\')" title="キープ解除">❤️</button>'
+          +'<a class="ci-lnk" href="'+c[2]+'" target="_blank" rel="noopener">詳細↗</a>'
+          +'</div>';
+      });
+    }
+    total += keepItems.length;
+    html += '<section class="cat-sec">'
+      +'<div class="cat-hd" style="background:linear-gradient(135deg,#9d174d,#db2777);">'
+      +'<span class="icon">❤️</span><span class="title">キープしたサークル</span><span class="cnt" style="color:#fce7f3;">'+keepItems.length+'団体</span></div>'
+      +'<div class="clist">'+kH+'</div></section>';
+    if (keepItems.length) {
+      html += '<div style="text-align:center;margin-top:-.5rem;margin-bottom:1rem;">'
+        +'<button onclick="if(confirm(\'キープをすべて解除しますか？\')){saveKeeps([]);renderMain();}" '
+        +'style="font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;">すべてのキープを解除する</button>'
+        +'</div>';
+    }
+  }
+
+  // インカレ
+  if(curFilter==='all'||curFilter==='インカレ'){
+    var incList=loadInc();
+    var incFiltered=q?incList.filter(function(c){return c.name.toLowerCase().includes(q)||c.block.toLowerCase().includes(q);}):incList;
+    var incGroups={};
+    incFiltered.forEach(function(c){if(!incGroups[c.block])incGroups[c.block]=[];incGroups[c.block].push(c);});
+    var joinLabel={'yes':'✅ 同志社生参加可','doshisha':'🏫 同志社主導','unknown':'❓ 不明'};
+    var iH='<div class="blk-hd" style="display:flex;align-items:center;justify-content:space-between;">'
+      +'<span>登録済みインカレ</span>'
+      +'<button onclick="openIncModal(null)" style="font-size:.72rem;font-weight:700;padding:.2rem .7rem;background:#059669;color:#fff;border:none;border-radius:5px;cursor:pointer;">＋ 追加</button>'
+      +'</div>';
+    if(!Object.keys(incGroups).length){
+      iH+='<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:.85rem;">まだ登録されていません。<br>「＋ 追加」からインカレサークルを登録できます。</div>';
+    } else {
+      Object.keys(incGroups).forEach(function(bn){
+        iH+='<div class="blk-hd">'+bn+'</div>';
+        incGroups[bn].forEach(function(c){
+          var lp=c.url?'<a class="ci-lnk" href="'+c.url+'" target="_blank" rel="noopener">リンク↗</a>':'';
+          var jbadge='<span style="font-size:.65rem;font-weight:700;padding:.15rem .45rem;background:#d1fae5;color:#065f46;border-radius:10px;flex-shrink:0;">'+(joinLabel[c.join]||'✅ 参加可')+'</span>';
+          iH+='<div class="ci">'
+            +'<div class="ci-em">'+c.emoji+'</div>'
+            +'<div style="flex:1;min-width:0;">'
+            +'<div class="ci-nm" style="cursor:default;">'+c.name+'</div>'
+            +(c.base?'<div style="font-size:.7rem;color:var(--muted);">🏫 '+c.base+'</div>':'')
+            +(c.desc?'<div style="font-size:.72rem;color:var(--muted);margin-top:.1rem;">'+c.desc+'</div>':'')
+            +'</div>'
+            +'<div style="display:flex;gap:.4rem;flex-shrink:0;align-items:center;flex-wrap:wrap;justify-content:flex-end;">'
+            +jbadge+lp
+            +'<button onclick="openIncModal('+c.id+')" style="font-size:.68rem;font-weight:700;padding:.22rem .5rem;background:var(--tag);color:var(--ink);border:1.5px solid var(--border);border-radius:5px;cursor:pointer;">編集</button>'
+            +'<button onclick="deleteIncClub('+c.id+')" style="font-size:.68rem;font-weight:700;padding:.22rem .5rem;background:#fff0f0;color:#c0392b;border:1.5px solid #fca5a5;border-radius:5px;cursor:pointer;">削除</button>'
+            +'</div></div>';
+        });
+      });
+    }
+    total+=incFiltered.length;
+    html+='<section class="cat-sec">'
+      +'<div class="cat-hd" style="background:linear-gradient(135deg,#065f46,#059669);">'
+      +'<span class="icon">🏫</span><span class="title">インカレサークル</span><span class="cnt" style="color:#a7f3d0;">'+incFiltered.length+'団体</span></div>'
+      +'<div class="clist">'+iH+'</div></section>';
+  }
+
+  // 非公認
+  if(curFilter==='all'||curFilter==='非公認'){
+    var unofficial=loadU();
+    var filtered=q?unofficial.filter(function(c){return c.name.toLowerCase().includes(q)||c.block.toLowerCase().includes(q);}):unofficial;
+    var groups={};
+    filtered.forEach(function(c){if(!groups[c.block])groups[c.block]=[];groups[c.block].push(c);});
+    var uH='<div class="blk-hd" style="display:flex;align-items:center;justify-content:space-between;">'
+      +'<span>登録済み団体</span>'
+      +'<button onclick="openUModal(null)" style="font-size:.72rem;font-weight:700;padding:.2rem .7rem;background:var(--accent);color:#fff;border:none;border-radius:5px;cursor:pointer;">＋ 追加</button>'
+      +'</div>';
+    if(!Object.keys(groups).length){
+      uH+='<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:.85rem;">まだ登録されていません。「＋ 追加」から登録できます。</div>';
+    } else {
+      Object.keys(groups).forEach(function(bn){
+        uH+='<div class="blk-hd">'+bn+'</div>';
+        groups[bn].forEach(function(c){
+          var esc=c.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+          var ratH=ratingHtml(c.name);
+          var kept=isKept(c.name);
+          uH+='<div class="ci">'
+            +'<div class="ci-em">'+c.emoji+'</div>'
+            +'<div style="flex:1;min-width:0;">'
+            +'<div class="ci-nm" onclick="openUDetailModal(\''+esc+'\')">'+c.name+'</div>'
+            +(c.desc?'<div style="font-size:.72rem;color:var(--muted);">'+c.desc+'</div>':'')
+            +'</div>'
+            +ratH
+            +'<button class="heart'+(kept?' on':'')+'" onclick="toggleKeep(\''+esc+'\')" title="キープ">'+(kept?'❤️':'🤍')+'</button>'
+            +'<button class="ci-rbtn" onclick="openRModal(\''+esc+'\')">評価</button>'
+            +'<div style="display:flex;gap:.4rem;flex-shrink:0;align-items:center;">'
+            +'<button onclick="openUModal('+c.id+')" style="font-size:.68rem;font-weight:700;padding:.22rem .5rem;background:var(--tag);color:var(--ink);border:1.5px solid var(--border);border-radius:5px;cursor:pointer;">編集</button>'
+            +'<button onclick="deleteUClub('+c.id+')" style="font-size:.68rem;font-weight:700;padding:.22rem .5rem;background:#fff0f0;color:#c0392b;border:1.5px solid #fca5a5;border-radius:5px;cursor:pointer;">削除</button>'
+            +'</div></div>';
+        });
+      });
+    }
+    total+=filtered.length;
+    html+='<section class="cat-sec">'
+      +'<div class="cat-hd" style="background:linear-gradient(135deg,#1e3a5f,#2d4a7a);">'
+      +'<span class="icon">📋</span><span class="title">自由サークル（非公認）</span><span class="cnt" style="color:#93c5fd;">'+filtered.length+'団体</span></div>'
+      +'<div class="clist">'+uH+'</div></section>';
+  }
+
+  if(!total&&q) html='<div class="no-res"><div style="font-size:2.5rem;margin-bottom:.5rem">🔍</div>「'+q+'」に一致する団体が見つかりませんでした。</div>';
+  main.innerHTML=html;
+  document.getElementById('countDisplay').textContent=total;
+}
+
+function setFilter(f,btn){
+  curFilter=f;
+  document.querySelectorAll('.fbtn').forEach(function(b){
+    b.classList.remove('active');
+    b.style.background='';
+    b.style.color= b.style.borderColor||'';
+  });
+  btn.classList.add('active');
+  if(f==='非公認'){ btn.style.background='#7c3aed'; btn.style.color='#fff'; btn.style.borderColor='#7c3aed'; }
+  else if(f==='インカレ'){ btn.style.background='#059669'; btn.style.color='#fff'; btn.style.borderColor='#059669'; }
+  else if(f==='keep'){ btn.style.background='#db2777'; btn.style.color='#fff'; btn.style.borderColor='#db2777'; }
+  else { btn.style.background=''; btn.style.color=''; btn.style.borderColor=''; }
+  renderMain();
+}
+
+function scrollToCategory(catKey){
+  closeDModal();
+  var btn=null;
+  document.querySelectorAll('.fbtn').forEach(function(b){
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+catKey+"'"))btn=b;
+  });
+  if(btn)setFilter(catKey,btn);
+  setTimeout(function(){var el=document.getElementById('cat-'+catKey);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+
+// ===== マッチング =====
+var MQ=[
+  {q:'活動スタイルは？',opts:[{l:'体を動かしたい！',i:'🏃',t:{sports:3,outdoor:2}},{l:'文化・芸術を楽しみたい',i:'🎨',t:{culture:3,art:2}},{l:'音楽が好き',i:'🎵',t:{music:3,culture:1}},{l:'国際交流・語学',i:'🌍',t:{intl:3,culture:1}},{l:'研究・学問を深めたい',i:'📚',t:{academic:3,culture:1}},{l:'技術・ものづくり',i:'🔧',t:{tech:3,academic:1}}]},
+  {q:'活動の頻度は？',opts:[{l:'週5日以上・本気でやりたい',i:'🔥',t:{taiiku:3}},{l:'週2〜3回くらい',i:'📅',t:{sports:2,culture:2}},{l:'週1回くらいゆるく',i:'😌',t:{culture:2,casual:2}},{l:'不定期・自由参加がいい',i:'🕊',t:{casual:3}}]},
+  {q:'サークルに求めるものは？',opts:[{l:'仲間・友達づくり',i:'🤝',t:{casual:2,sports:1,culture:1}},{l:'実力を上げたい・大会出場',i:'🏆',t:{taiiku:3,sports:2}},{l:'スキルや知識を磨く',i:'💡',t:{tech:2,academic:2,culture:1}},{l:'楽しいイベント・思い出',i:'🎉',t:{casual:3,music:1}},{l:'社会貢献・ボランティア',i:'🌱',t:{volunteer:3,intl:1}}]},
+  {q:'人数規模の好みは？',opts:[{l:'大人数でわいわい！',i:'👥',t:{taiiku:2,casual:1,music:1}},{l:'少人数でアットホーム',i:'🏠',t:{academic:2,art:2,casual:1}},{l:'どちらでもOK',i:'🙆',t:{sports:1,culture:1,casual:1}}]},
+  {q:'経験は？',opts:[{l:'完全初心者・新しいことを始めたい',i:'🌱',t:{casual:2,culture:1,music:1}},{l:'経験があって続けたい',i:'💪',t:{taiiku:2,sports:2,music:1}},{l:'どちらでもない',i:'😊',t:{casual:1,culture:1}}]},
+  {q:'課外活動でどんな自分になりたい？',opts:[{l:'体力・精神力を鍛えたい',i:'⚡',t:{taiiku:3,sports:1}},{l:'表現力・感性を磨きたい',i:'🎭',t:{art:3,music:2,culture:1}},{l:'国際感覚を身につけたい',i:'✈️',t:{intl:3,academic:1}},{l:'専門知識・技術を深めたい',i:'🔬',t:{tech:3,academic:2}},{l:'リーダーシップを磨きたい',i:'🎯',t:{taiiku:2,casual:1,volunteer:1}},{l:'とにかく楽しみたい',i:'🌈',t:{casual:3,music:1}}]}
+];
+var CT=[
+  {n:'体育会系クラブ',e:'🏆',d:'本気で競技に打ち込みたいあなたに。伝統と実績ある体育会で頂点を目指せます。',t:{taiiku:5,sports:2},k:'体育会'},
+  {n:'スポーツブロッククラブ',e:'⚽',d:'競技もイベントも楽しみたいあなたに。勝負にこだわりつつ仲間との時間も大切にできます。',t:{sports:4,taiiku:1,casual:2},k:'スポーツ'},
+  {n:'音楽系サークル（合唱・軽音・器楽）',e:'🎵',d:'音楽が好きなあなたに。初心者から上級者まで、ジャンル問わず活躍できる場があります。',t:{music:5,culture:2,art:1},k:'文化系'},
+  {n:'演劇・伝統芸能サークル',e:'🎭',d:'表現することが好きなあなたに。舞台・能楽・雅楽など唯一無二の体験ができます。',t:{art:4,culture:3,casual:1},k:'文化系'},
+  {n:'国際交流・語学サークル',e:'🌍',d:'世界を広げたいあなたに。留学生との交流や英語ディベートで国際感覚が磨かれます。',t:{intl:5,academic:2,casual:1},k:'文化系'},
+  {n:'学術・研究系サークル',e:'📚',d:'知的好奇心旺盛なあなたに。法律・考古学・SF・将棋など深く掘り下げる楽しさがあります。',t:{academic:5,tech:2,culture:1},k:'文化系'},
+  {n:'技術・ものづくり系サークル',e:'🤖',d:'手と頭を動かすことが好きなあなたに。ロボット・電気・ロケットで実践的スキルが身につきます。',t:{tech:5,academic:2},k:'文化系'},
+  {n:'芸術・写真・映像系サークル',e:'🎨',d:'創ることが好きなあなたに。絵・写真・映像で自己表現できる居場所が見つかります。',t:{art:5,culture:2,casual:1},k:'文化系'},
+  {n:'ボランティア・社会貢献系サークル',e:'🌱',d:'誰かの役に立ちたいあなたに。地域・国際・福祉など活動を通じて社会とつながれます。',t:{volunteer:5,intl:1,casual:1},k:'文化系'},
+  {n:'ゆるく楽しめるサークル',e:'😊',d:'まずは気軽に楽しみたいあなたに。放送・新聞・鉄道・ヒーローショーなど個性派ぞろいです。',t:{casual:5,culture:2},k:'文化系'}
+];
+var mStep=0, mScores={};
+function openMatching(){ mStep=0; mScores={}; document.getElementById('matchModal').classList.add('open'); renderMStep(); }
+function closeMatching(){ document.getElementById('matchModal').classList.remove('open'); }
+function renderMStep(){
+  var box=document.getElementById('matchBox');
+  if(mStep>=MQ.length){ renderMResult(); return; }
+  var q=MQ[mStep]; var prog=(mStep/MQ.length)*100;
+  box.innerHTML='<div class="mhd"><h2>✨ サークル相性診断</h2><button class="xbtn" onclick="closeMatching()">✕</button></div>'
+    +'<div class="mbody"><div class="mprog"><div class="mprog-bar" style="width:'+prog+'%"></div></div>'
+    +'<div class="mql">Q'+(mStep+1)+' / '+MQ.length+'</div>'
+    +'<div class="mqt">'+q.q+'</div>'
+    +'<div class="mopts">'+q.opts.map(function(o,i){return '<button class="mopt" onclick="selOpt('+i+')">'+'<span class="mopt-i">'+o.i+'</span>'+o.l+'</button>';}).join('')+'</div>'
+    +'</div>';
+}
+function selOpt(i){
+  var tags=MQ[mStep].opts[i].t;
+  Object.keys(tags).forEach(function(k){ mScores[k]=(mScores[k]||0)+tags[k]; });
+  mStep++; renderMStep();
+}
+function renderMResult(){
+  var ranked=CT.map(function(ct){
+    var sc=0; Object.keys(ct.t).forEach(function(k){ sc+=(mScores[k]||0)*ct.t[k]; });
+    return Object.assign({},ct,{score:sc});
+  }).sort(function(a,b){return b.score-a.score;}).slice(0,3);
+  var medals=['🥇','🥈','🥉'], rclass=['r1','r2','r3'];
+  var max=ranked[0].score||1;
+  var box=document.getElementById('matchBox');
+  box.innerHTML='<div class="mhd"><h2>✨ 診断結果</h2><button class="xbtn" onclick="closeMatching()">✕</button></div>'
+    +'<div class="mbody"><div class="mres">'
+    +'<div style="font-size:.75rem;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;">あなたにおすすめのサークル系統</div>'
+    +'<div style="font-size:1.05rem;font-weight:900;margin-bottom:1.25rem;">TOP 3 を発表します！🎉</div>'
+    +ranked.map(function(r,i){
+      var pct=Math.round((r.score/max)*100);
+      return '<div class="mcard '+rclass[i]+'">'
+        +'<div style="font-size:1.5rem;flex-shrink:0;">'+medals[i]+'</div>'
+        +'<div style="flex:1;"><div style="font-size:.92rem;font-weight:900;">'+r.e+' '+r.n+'</div>'
+        +'<div style="font-size:.75rem;color:var(--muted);margin-top:.2rem;line-height:1.5;">'+r.d+'</div>'
+        +'<div class="mcard-bar"><div class="mcard-fill" style="width:'+pct+'%"></div></div></div>'
+        +'<div style="font-size:.8rem;font-weight:900;color:var(--accent);background:var(--tag);padding:.2rem .6rem;border-radius:20px;flex-shrink:0;">'+pct+'%</div>'
+        +'</div>';
+    }).join('')
+    +'<button class="mlink" onclick="scrollToCategory(\''+ranked[0].k+'\')">1位のサークルを見てみる →</button>'
+    +'<button class="mretry" onclick="openMatching()">🔄 もう一度診断する</button>'
+    +'</div></div>';
+}
+</script>
+</body>
+</html>
